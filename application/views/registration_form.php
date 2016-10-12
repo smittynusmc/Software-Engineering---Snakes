@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 }
                 echo validation_errors();
                 echo "</div>";
-                echo form_open('user_authentication/new_user_registration');?>
+                echo form_open('User_Authentication/new_user_registration');?>
                     <div class="box-body" >
                         <div class="form-group">
                             <label for="username">Username</label>

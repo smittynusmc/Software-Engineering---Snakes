@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h3 class="box-title">Login</h3>
                 </div>
                 
-                <?php echo form_open('user_authentication/user_login_process'); ?>
+                <?php echo form_open('User_Authentication/user_login_process'); ?>
                     <div class="box-body" >
                         <div class="form-group">
                             <label for="username">Username</label>
