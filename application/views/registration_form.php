@@ -38,9 +38,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                         </div>
                         <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <input type="firstname" class="form-control" name="firstname" id="email" placeholder="First Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                            <input type="lastname" class="form-control" name="lastname" id="email" placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                         </div>
+                        
                     </div>   
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Sign Up</button>
