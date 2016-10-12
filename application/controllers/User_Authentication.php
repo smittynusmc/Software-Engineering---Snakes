@@ -35,13 +35,17 @@ Class User_Authentication extends CI_Controller {
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('registration_form');
         } else {
             $data = array(
                 'user_name' => $this->input->post('username'),
                 'user_email' => $this->input->post('email'),
-                'user_password' => $this->input->post('password')
+                'user_password' => $this->input->post('password'),
+                'firstname' => $this->input->post('firstname'),
+                'lastname' => $this->input->post('lastname')
             );
             $result = $this->login_database->registration_insert($data);
             if ($result == TRUE) {
