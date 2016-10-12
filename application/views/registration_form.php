@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
     <?php
     if (isset($this->session->userdata['logged_in'])) {
-        header("location: http://localhost/login/index.php/user_authentication/user_login_process");
+        header("location: ".base_url()."/login/index.php/User_Authentication/user_login_process");
     }
     ?>
     <head>
