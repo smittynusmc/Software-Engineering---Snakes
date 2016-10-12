@@ -20,6 +20,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+            if (isset($this->session->userdata['logged_in'])) {
+                $username = ($this->session->userdata['logged_in']['username']);
+                $email = ($this->session->userdata['logged_in']['email']);
+                $this->load->view('admin_page');
+            } else {
+                header("location: login");
+            }
+            
 	}
 }
