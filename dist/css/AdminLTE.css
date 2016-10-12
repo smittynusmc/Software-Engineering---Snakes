@@ -470,7 +470,7 @@ a:focus {
   position: relative;
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  overflow: hidden;
 }
 .user-panel:before,
 .user-panel:after {
@@ -488,6 +488,7 @@ a:focus {
 .user-panel > .info {
   padding: 5px 5px 5px 15px;
   line-height: 1;
+  position: absolute;
   left: 55px;
 }
 .user-panel > .info > p {
