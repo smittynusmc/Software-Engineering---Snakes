@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'elvis.rowan.edu',
 	'username' => 'boe_project',
 	'password' => 'snakes',
 	'database' => 'boe_project',
