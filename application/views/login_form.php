@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php
     if (isset($this->session->userdata['logged_in'])) {
 
-        header("location: ".base_url()."login/index.php/user_authentication/user_login_process");
+        header("location: ".base_url()."login/index.php/User_Authentication/user_login_process");
     }
     ?>
     <head>
@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
-                    <a href="<?php echo base_url() ?>index.php/user_authentication/user_registration_show">To SignUp Click Here</a>
+                    <a href="<?php echo base_url() ?>index.php/User_Authentication/user_registration_show">To SignUp Click Here</a>
                 
                     <?php echo form_close(); ?>
             </div>
