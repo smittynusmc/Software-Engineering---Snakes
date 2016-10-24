@@ -22,11 +22,13 @@ Class User_Authentication extends CI_Controller {
 
 // Show login page
     public function index() {
+//         echo $this->encryption->encrypt('phong');
         $this->load->view('login_form');
     }
 
 // Show registration page
     public function user_registration_show() {
+       
         $this->load->view('registration_form');
     }
     
@@ -48,7 +50,7 @@ Class User_Authentication extends CI_Controller {
             $data = array(
                 'user_name' => $this->input->post('username'),
                 'user_email' => $this->input->post('email'),
-                'user_password' => $this->input->post('password'),
+                'user_password' => $this->encryption->encrypt($this->input->post('password')),
                 'firstname' => $this->input->post('firstname'),
                 'lastname' => $this->input->post('lastname')
             );
@@ -75,25 +77,31 @@ Class User_Authentication extends CI_Controller {
                 $this->load->view('login_form');
             }
         } else {
-            $data = array(
-                'username' => $this->input->post('username'),
-                'password' => $this->input->post('password')
-            );
-            $result = $this->login_database->login($data);
-            if ($result == TRUE) {
-
-                $username = $this->input->post('username');
-                $result = $this->login_database->read_user_information($username);
-                if ($result != false) {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            $result = $this->login_database->read_user_information($username);
+             
+            if ($result != false) {
+                if($this->check_password($password,$result[0]->user_password)){
                     $session_data = array(
                         'username' => $result[0]->user_name,
                         'email' => $result[0]->user_email,
+                        'firstname' => $result[0]->firstname,
+                        'lastname' => $result[0]->lastname,
                     );
-// Add user data in session
+    // Add user data in session
                     $this->session->set_userdata('logged_in', $session_data);
                     $this->load->view('admin_page');
                 }
-            } else {
+                else{
+                    $data = array(
+                    'error_message' => 'Invaslid Username or Password'
+                    );
+                    $this->load->view('login_form', $data);
+                }
+                
+            }
+            else {
                 $data = array(
                     'error_message' => 'Invalid Username or Password'
                 );
@@ -112,6 +120,9 @@ Class User_Authentication extends CI_Controller {
         $this->session->unset_userdata('logged_in', $sess_array);
         $data['message_display'] = 'Successfully Logout';
         $this->load->view('login_form', $data);
+    }
+    private function check_password($password,$encryted_password){
+        return $this->encryption->decrypt($encryted_password) == $password;
     }
 
 }
