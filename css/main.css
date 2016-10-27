@@ -1,0 +1,11 @@
+.detail-title{
+    align-content: right;
+    font-weight: bold;
+}
+.detail-info{
+    align-content: center;
+        
+}
+.form-error{
+    color: red;
+}

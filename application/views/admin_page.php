@@ -17,6 +17,7 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>css/main.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <!-- Ionicons -->
@@ -66,7 +67,20 @@
                     <ul class="sidebar-menu">
                         <li class="header">MAIN NAVIGATION</li>
                         <li class="treeview">
-                            <a href="/index.php/BugUpload" target="content">Upload</a>
+                            <a class='menu-item' archo="Project/index" target="content">Project</a>
+                        </li>
+                        <li class="treeview">
+                            <a class='menu-item' archo="Product/index" target="content">Product</a>
+                        </li>
+                        <li class="treeview">
+                            <a class='menu-item' archo="Bug/index" target="content">Bug</a>
+                        </li>
+                        <li class="treeview">
+                            <a class='menu-item' archo="WBS/index" target="content">WBS</a>
+                        </li>
+                        
+                        <li class="treeview">
+                            <a class='menu-item' archo="Development/index" target="content">Developement</a>
                         </li>
                         
                     </ul>
@@ -77,14 +91,15 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-                <iframe name="content" style="width: 100%;height: 100%">
+                <div name="content" id='content' style="width: 100%;height: 100%">
                     
-                </iframe>
+                </div>
 
                 <!-- Main content -->
                 
                 <!-- /.content -->
             </div>
+            
         </div>
         <!-- ./wrapper -->
 
@@ -98,9 +113,9 @@
         </script>
         <!-- Bootstrap 3.3.6 -->
         <script src="<?php echo base_url(); ?>bootstrap/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/admin_page.js"></script>
         <!-- Morris.js charts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="<?php echo base_url(); ?>plugins/morris/morris.min.js"></script>
         <!-- Sparkline -->
         <script src="<?php echo base_url(); ?>plugins/sparkline/jquery.sparkline.min.js"></script>
         <!-- jvectormap -->
@@ -119,11 +134,5 @@
         <script src="<?php echo base_url(); ?>plugins/slimScroll/jquery.slimscroll.min.js"></script>
         <!-- FastClick -->
         <script src="<?php echo base_url(); ?>plugins/fastclick/fastclick.js"></script>
-        <!-- AdminLTE App -->
-        <script src="<?php echo base_url(); ?>dist/js/app.min.js"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="<?php echo base_url(); ?>dist/js/pages/dashboard.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
     </body>
 </html>
