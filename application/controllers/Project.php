@@ -96,12 +96,12 @@ Class Project extends CI_Controller {
             if($result == FALSE){
                 $data['status'] = 'failed';
                 $data['result'] = "Edit failed.";
-                $this->load->view('project/insert',$data);
+                $this->load->view('project/edit',$data);
             }
             else{
                 $data['status'] = 'success';
                 $data['result'] = "Edit success.";
-                $this->load->view('project/insert',$data);
+                $this->load->view('project/edit',$data);
             }
             
         }

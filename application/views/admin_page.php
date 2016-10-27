@@ -41,7 +41,7 @@
 
             <header class="main-header">
                 <!-- Logo -->
-                <a href="index2.html" class="logo">
+                <a href="" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-lg"><b>BOE Project</b></span>
@@ -67,20 +67,20 @@
                     <ul class="sidebar-menu">
                         <li class="header">MAIN NAVIGATION</li>
                         <li class="treeview">
-                            <a class='menu-item' archo="Project/index" target="content">Project</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Project/index" target="content">Project</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="Product/index" target="content">Product</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Product/index" target="content">Product</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="Bug/index" target="content">Bug</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Bug/index" target="content">Bug</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="WBS/index" target="content">WBS</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/WBS/index" target="content">WBS</a>
                         </li>
                         
                         <li class="treeview">
-                            <a class='menu-item' archo="Development/index" target="content">Developement</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Development/index" target="content">Developement</a>
                         </li>
                         
                     </ul>

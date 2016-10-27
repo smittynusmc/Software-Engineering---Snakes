@@ -51,7 +51,7 @@
             <?php
             if(isset($result)){
                 if(isset($status) && $status='success'){
-                    echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' record='Project-{$Project_ID}' target ='content'> $result</button>";
+                    echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' archo='".base_url()."index.php/Project/index/{$Project_ID}' target ='content'> $result</button>";
                 }
                 else{
                     echo $result;

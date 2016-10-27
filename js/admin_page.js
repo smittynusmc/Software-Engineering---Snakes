@@ -6,7 +6,7 @@ $(document).ready(function () {
         var target = $(this).attr('target');
         $.ajax({
             type: 'POST',
-            url: '/index.php/' + archo,
+            url:  archo,
             success: function (data) {
                 $('#' + target).html(data);
             }
@@ -19,7 +19,7 @@ $(document).ready(function () {
         var achor = $(this).attr('archo');
         $.ajax({
             type: 'POST',
-            url: '/index.php/' + achor,
+            url:  achor,
             success: function (data) {
                 $('#my_dialog').html(data);
                 $('#my_dialog').modal('show');
@@ -30,7 +30,7 @@ $(document).ready(function () {
         var achor = $(this).attr('archo');
         $.ajax({
             type: 'POST',
-            url: '/index.php/' + achor,
+            url:  achor,
             success: function (data) {
                 $('#my_dialog').html(data);
                 $('#my_dialog').modal('show');
@@ -42,7 +42,6 @@ $(document).ready(function () {
         e.preventDefault();
         var formid = $(this).attr('formid');
         var formdata = $('#'+formid).serialize();
-        console.log(formdata);
         var url = $('#'+formid).attr('action')
         $.ajax({
             type: 'POST',
@@ -57,18 +56,18 @@ $(document).ready(function () {
     
     $(document).on('click','.btn-loadrecord',function(e){
        e.preventDefault();
-       var record_data =   $(this).attr('record').split('-');
-       var controler = record_data[0];
-       var record_id = record_data[1];
-       var target = $(this).attr('target');
        $('#my_dialog').modal('hide');
+       $('.modal-backdrop').remove();
+       var achor = $(this).attr('archo');
+       var target = $(this).attr('target');
+       
        $.ajax({
             type: 'POST',
-            url: '/index.php/'+controler+'/index/'+record_id,
+            url: achor,
             success: function (data) {
                 
                 $('#' + target).html(data);
-                
+                $('.modal-backdrop').remove();
             }
         });
        

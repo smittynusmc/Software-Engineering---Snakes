@@ -28,7 +28,7 @@ Class ProjectModel extends CI_Model {
         $query = "SELECT * "
                 . "FROM Project "
                 . "WHERE (? = '' OR Project_ID =?) "
-                . " AND (? = '' OR Project_Name = ?)"
+                . " AND (? = '' OR Project_Name LIKE CONCAT('%',?,'%') )"
                 . " AND (Build_Date >= ? AND End_Date <= ? )";
         $inputs = array($Project_ID,$Project_ID,$Project_Name,$Project_Name,$Build_Date,$End_Date);
         
@@ -37,8 +37,7 @@ Class ProjectModel extends CI_Model {
             
             return $result->result();
         } else {
-            echo $this->db->last_query()    ;    
-            return false;
+            return FALSE  ;
         }
     }
     

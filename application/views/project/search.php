@@ -50,13 +50,13 @@
         <div class="modal-footer" id="project_search-result">
             <?php
             if(isset($result)){
-                if(isset($status) && $status='success'){
+                if(isset($status) && $status=='success'){
                     foreach ($result as $record){
-                        echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' record='Project-{$record->Project_ID}' target ='content'>  {$record->Project_Name}</button>";
+                        echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' archo='".base_url()."index.php/Project/index/{$record->Project_ID}'target ='content'>  {$record->Project_Name}</button>";
                     }
                 }
                 else{
-                    echo $result;
+                    echo "<button class='btn btn-default btn-block error' >  $result</button>";
                 }
             }
             ?>
