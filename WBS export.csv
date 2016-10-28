@@ -1,0 +1,27 @@
+WBS_ID,WBS_Name
+1.1.1.x.1.2,Admin Support
+1.1.1.x.3.2.2,Billings Support
+1.1.2.x.y.3,Clerical Support
+1.1.1.x.3.3.1,Contract Support
+1.1.2.x.y.1,Control Account Management
+1.1.2.x.y.4,CSL Management
+1.5.x.y.3,Customer Integration Test Support (MEIT)
+1.8.3.x.2,Development (INTF)
+1.3.1.x.y.1.1,ECM Support
+1.1.2.x.y.2,Functional Management
+1.2.x.y.2.1,High Level Design
+1.10.x.1.2,Integration Coordination and Direction
+1.1.1.x.2.1,IT Support
+1.3.3.x.2.y.1,Maintenance Problem Reports
+1.7.x.1,Metrics/Process Engineering
+1.2.x.y.3.1,Product Architects
+1.8.1.x.1,Production (CM)
+1.1.1.x.3.1.2,Project Control Analysis
+1.1.1.x.3.1.1,Project Control Mgmt
+1.1.1.x.1.1,Project Management
+1.2.x.y.1.1,SE Support
+1.1.1.x.1.3,Senior Management
+1.3.3.x.3.y.1,Specification Problems Reports
+1.8.2.x.1,Support (Metrics Information System)
+1.8.2.x.2,Support (Problem Report and Delivery Tracking System)
+1.1.1.x.3.2.1,XMS/Labor Support
