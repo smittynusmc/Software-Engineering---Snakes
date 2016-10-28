@@ -13,9 +13,11 @@ Class Project extends CI_Controller {
         $this->load->library('encryption');
 // Load session library
         $this->load->library('session');
-
+            
 // Load database
         $this->load->model('ProjectModel');
+// Load file helper library        
+        $this->load->helper('file');
     }
     
     public function index($id=null) {
@@ -165,5 +167,16 @@ Class Project extends CI_Controller {
             $data['End_Date'] = '';
         }
         $this->load->view('project/insert',$data);
+    }
+    
+    public function get_upload(){
+        $this->load->view('project/upload');
+    }
+    
+    public function upload(){
+        $csv =  $this->input->post('csv');
+        $data['csvdata'] = $csv;
+        
+        $this->load->view('project/upload',$data);
     }
 }
