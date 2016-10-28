@@ -79,7 +79,10 @@ Class ProjectModel extends CI_Model {
         $db_debug = $this->db->db_debug;
         $this->db->db_debug = FALSE;
         foreach ($data as $record) {
-            if (!$this->db->insert('Project', $record)) {
+            if(empty($record['Project_ID']) || empty($record['Project_Name'])){
+                $count_error++;
+            }
+            elseif (!$this->db->insert('Project', $record)) {
                 $count_error++;
             } else {
                 $count_success++;

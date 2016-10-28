@@ -17,6 +17,7 @@
                   <label>
                       <input type="checkbox" id="has_header" name ="has_header" value="1" checked> CSV File included header
                   </label>
+                    <p class="help-block">Check this box if the csv file to be uploaded contains column headings.</p>
                 </div>
                 
                 <div class="form-group">
