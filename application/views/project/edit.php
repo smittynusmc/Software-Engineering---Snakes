@@ -65,5 +65,4 @@
 <script>
     $('#End_Date').datepicker({format: 'yyyy-mm-dd',});
     $('#Build_Date').datepicker({format: 'yyyy-mm-dd',});
-    
 </script>

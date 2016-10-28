@@ -41,12 +41,14 @@ $(document).ready(function () {
     $(document).on('click', '.submit-button', function(e) { 
         e.preventDefault();
         var formid = $(this).attr('formid');
-        var formdata = $('#'+formid).serialize();
         var url = $('#'+formid).attr('action')
+  
         $.ajax({
             type: 'POST',
             url: url,
-            data: formdata,
+            data: new FormData( $('#'+formid)[0] ),
+            processData: false,
+            contentType: false,
             success: function (data) {
                 $('#my_dialog').html(data);
                 $('#my_dialog').modal('show');
