@@ -13,6 +13,7 @@
                     <?php echo validation_errors(); ?>
                 </div>
                 <div class="form-group">
+
                     <label for="Project_ID">WBS ID</label>
                     <input type="text" class="form-control" name="WBS_ID" id="Project_ID" placeholder="Project ID" value="<?php echo $WBS_ID;?>">
                 </div>
@@ -30,6 +31,7 @@
             </div>
         </div>
         <div class="modal-footer" id="project_search-result">
+
                     <label for="WBS_ID">WBS ID</label>
                     <input type="text" class="form-control" name="WBS_ID" id="WBS_ID" placeholder="WBS ID" value="<?php echo $WBS_ID;?>">
                 </div>
@@ -57,7 +59,6 @@
                     echo "<button class='btn btn-default btn-block error' >  $result</button>";
                 }
             }
-
             ?>
         </div>
         <?php echo form_close(); ?>

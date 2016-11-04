@@ -8,3 +8,4 @@
 <?php }?>  
 &nbsp;
 <i class='glyphicon glyphicon-upload'></i> <a class='function-button'  archo='<?php echo base_url(); ?>index.php/WBS/get_upload' title='Import from a CSV File'>Upload</a>
+
