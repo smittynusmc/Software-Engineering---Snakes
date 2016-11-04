@@ -5,10 +5,10 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="project_insert-title"> Add New Project</h4>
+            <h4 class="modal-title" id="WBS_insert-title"> Add New WBS</h4>
         </div>
-        <div class="modal-body" id="project_insert-body">
-            <?php echo form_open('Project/upload',array('id'=>'project_upload_form')); ?>
+        <div class="modal-body" id="WBS_insert-body">
+            <?php echo form_open('WBS/upload',array('id'=>'WBS_upload_form')); ?>
             <div class="box-body" >
                 <div class="form-error">
                     <?php echo validation_errors(); ?>
@@ -27,12 +27,12 @@
                 </div>
             </div> 
         </div>
-        <div class="modal-footer" id="project_insert-footer">
+        <div class="modal-footer" id="WBS_insert-footer">
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary submit-button" formid="project_upload_form">Submit</button>
+                <button type="submit" class="btn btn-primary submit-button" formid="WBS_upload_form">Submit</button>
             </div>
         </div>
-        <div class="modal-footer" id="project_search-result">
+        <div class="modal-footer" id="WBS_search-result">
             <?php
             if(isset($result)){
                 if(isset($status) && $status='success'){
