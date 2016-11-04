@@ -8,35 +8,35 @@
             <h4 class="modal-title" id="WBS_insert-title"> Add New WBS</h4>
         </div>
         <div class="modal-body" id="WBS_insert-body">
-            <?php echo form_open('WBS/upload',array('id'=>'WBS_upload_form')); ?>
+            <?php echo form_open('WBS/insert',array('id'=>'WBS_insert_form')); ?>
             <div class="box-body" >
                 <div class="form-error">
                     <?php echo validation_errors(); ?>
                 </div>
-                <div class="checkbox">
-                  <label>
-                      <input type="checkbox" id="has_header" name ="has_header" value="1" checked> CSV File included header
-                  </label>
-                    <p class="help-block">Check this box if the csv file to be uploaded contains column headings.</p>
+                <div class="form-group">
+                    <label for="WBS_ID">WBS ID</label>
+                    <input type="text" class="form-control" name="WBS_ID" id="WBS_ID" placeholder="WBS ID" value="<?php echo $WBS_ID;?>">
+                </div>
+                <div class="form-group">
+                    <label for="WBS_Name">WBS Name</label>
+                    <input type="text" class="form-control" name="WBS_Name" id="WBS_Name" placeholder="WBS Name" value="<?php echo $WBS_Name;?>">
                 </div>
                 
-                <div class="form-group">
-                    <label for="csv">File input</label>
-                    <input type="file" id="csv" name ="csv">
-                    <p class="help-block">Only csv files are allowed.</p>
-                </div>
+
+                
+                
             </div> 
         </div>
         <div class="modal-footer" id="WBS_insert-footer">
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary submit-button" formid="WBS_upload_form">Submit</button>
+                <button type="submit" class="btn btn-primary submit-button" formid="WBS_insert_form">Submit</button>
             </div>
         </div>
         <div class="modal-footer" id="WBS_search-result">
             <?php
             if(isset($result)){
                 if(isset($status) && $status='success'){
-                    echo "<button class='btn btn-default btn-block' type='button' target ='content'> $result</button>";
+                    echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' archo='".base_url()."index.php/WBS/index/{$WBS_ID}' target ='content'> $result</button>";
                 }
                 else{
                     echo $result;
@@ -47,3 +47,4 @@
         <?php echo form_close(); ?>
     </div>
 </div>
+

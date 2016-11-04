@@ -3,7 +3,7 @@
 Class WBSModel extends CI_Model {
 
     public function get($id) {
-        $result = $this->db->query("SELECT * FROM WBS WHERE WBS_ID = ? ", array($id));
+        $result = $this->db->query("SELECT * FROM WBS WHERE WBS_ID = ?", array($id));
         if ($result->num_rows() >= 1) {
             return $result->result();
         } else {
@@ -20,7 +20,6 @@ Class WBSModel extends CI_Model {
         if (isset($data['WBS_Name'])) {
             $WBS_Name = $data['WBS_Name'];
         }
-       
         $query = "SELECT * "
                 . "FROM WBS "
                 . "WHERE (? = '' OR WBS_ID =?) "
@@ -40,7 +39,7 @@ Class WBSModel extends CI_Model {
         $cleaned = $this->cleanEmpty($data);
         $fields = implode(',', array_keys($cleaned));
         $value = implode(',', array_fill(0, count($cleaned), '?'));
-        $query = "INSERT INTO Project ({$fields}) VALUES({$value})";
+        $query = "INSERT INTO WBS ({$fields}) VALUES({$value})";
         if (!$this->db->query($query, $cleaned)) {
             return false;
         } else {
@@ -50,10 +49,10 @@ Class WBSModel extends CI_Model {
 
     public function update($data) {
         $cleaned = $this->cleanEmpty($data);
-        $Project_ID = $cleaned['WBS_ID'];
+        $WBS_ID = $cleaned['WBS_ID'];
         unset($cleaned['WBS_ID']);
 
-        $this->db->where('WBS_ID', $Project_ID);
+        $this->db->where('WBS_ID', $WBS_ID);
         if (!$this->db->update('WBS', $cleaned)) {
             return false;
         } else {
@@ -71,7 +70,7 @@ Class WBSModel extends CI_Model {
         $db_debug = $this->db->db_debug;
         $this->db->db_debug = FALSE;
         foreach ($data as $record) {
-            if(empty($record['WBS_ID']) || empty($record['WBS_ID'])){
+            if(empty($record['WBS_ID']) || empty($record['WBS_Name'])){
                 $count_error++;
             }
             elseif (!$this->db->insert('WBS', $record)) {
