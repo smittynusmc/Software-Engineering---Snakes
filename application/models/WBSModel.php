@@ -1,9 +1,9 @@
 <?php
 
-Class ProjectModel extends CI_Model {
+Class WBSModel extends CI_Model {
 
     public function get($id) {
-        $result = $this->db->query("SELECT * FROM Project WHERE Project_ID = ? ", array($id));
+        $result = $this->db->query("SELECT * FROM WBS WHERE WBS_ID = ? ", array($id));
         if ($result->num_rows() >= 1) {
             return $result->result();
         } else {
@@ -12,28 +12,20 @@ Class ProjectModel extends CI_Model {
     }
 
     public function search($data) {
-        $Project_ID = '';
-        if (isset($data['Project_ID'])) {
-            $Project_ID = $data['Project_ID'];
+        $WBS_ID = '';
+        if (isset($data['WBS_ID'])) {
+            $WBS_ID = $data['WBS_ID'];
         }
-        $Project_Name = '';
-        if (isset($data['Project_Name'])) {
-            $Project_Name = $data['Project_Name'];
+        $WBS_Name = '';
+        if (isset($data['WBS_Name'])) {
+            $WBS_Name = $data['WBS_Name'];
         }
-        $Build_Date = '1900-01-01';
-        if (isset($data['Build_Date']) && !empty($data['Build_Date'])) {
-            $Build_Date = $data['Build_Date'];
-        }
-        $End_Date = '2900-12-31';
-        if (isset($data['End_Date']) && !empty($data['End_Date'])) {
-            $End_Date = $data['End_Date'];
-        }
+       
         $query = "SELECT * "
-                . "FROM Project "
-                . "WHERE (? = '' OR Project_ID =?) "
-                . " AND (? = '' OR Project_Name LIKE CONCAT('%',?,'%') )"
-                . " AND (Build_Date >= ? AND End_Date <= ? )";
-        $inputs = array($Project_ID, $Project_ID, $Project_Name, $Project_Name, $Build_Date, $End_Date);
+                . "FROM WBS "
+                . "WHERE (? = '' OR WBS_ID =?) "
+                . " AND (? = '' OR WBS_Name LIKE CONCAT('%',?,'%') )";
+        $inputs = array($WBS_ID, $WBS_ID, $WBS_Name, $WBS_Name);
 
         $result = $this->db->query($query, $inputs);
         if ($result->num_rows() >= 1) {
@@ -58,11 +50,11 @@ Class ProjectModel extends CI_Model {
 
     public function update($data) {
         $cleaned = $this->cleanEmpty($data);
-        $Project_ID = $cleaned['Project_ID'];
-        unset($cleaned['Project_ID']);
+        $Project_ID = $cleaned['WBS_ID'];
+        unset($cleaned['WBS_ID']);
 
-        $this->db->where('Project_ID', $Project_ID);
-        if (!$this->db->update('Project', $cleaned)) {
+        $this->db->where('WBS_ID', $Project_ID);
+        if (!$this->db->update('WBS', $cleaned)) {
             return false;
         } else {
             return true;
@@ -72,17 +64,17 @@ Class ProjectModel extends CI_Model {
     public function import($data) {
         $count_error = 0;
         $count_success = 0;
-        $column_names = array('Project_ID', 'Project_Name', 'Build_Date', 'End_Date');
+        $column_names = array('WBS_ID', 'WBS_Name');
         array_walk($data, function(&$a) use ($column_names) {
             $a = array_combine($column_names, $a);
         });
         $db_debug = $this->db->db_debug;
         $this->db->db_debug = FALSE;
         foreach ($data as $record) {
-            if(empty($record['Project_ID']) || empty($record['Project_Name'])){
+            if(empty($record['WBS_ID']) || empty($record['WBS_ID'])){
                 $count_error++;
             }
-            elseif (!$this->db->insert('Project', $record)) {
+            elseif (!$this->db->insert('WBS', $record)) {
                 $count_error++;
             } else {
                 $count_success++;
