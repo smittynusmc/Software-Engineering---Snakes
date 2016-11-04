@@ -8,7 +8,6 @@
     </div>
     <div class="box-body">
         <table class="table">
-             
             <tbody>
               <tr>
                 <td class="detail-title">WBS ID:</td>
@@ -16,7 +15,6 @@
                 <td class="detail-title">WBS Name:</td>
                 <td class="detail-info"><?php echo $WBS_Name;?></td>
               </tr>
-              
             </tbody>
           </table>
         
