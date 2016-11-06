@@ -1,6 +1,6 @@
 <?php
 
-Class Bug extends CI_Controller {
+Class CPCR extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');   
@@ -20,7 +20,7 @@ Class Bug extends CI_Controller {
     public function index($id=null) {
         
        
-        $this->load->view('bug/view');
+        $this->load->view('cpcr/view');
     }
     
 }

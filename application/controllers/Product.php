@@ -22,13 +22,15 @@ Class Product extends CI_Controller {
     }
 
     public function index($id = null) {
-        $data['Product_Code'] = '';
-        $data['Product_Name'] = '';
+        $data['product_id'] = '';
+        $data['product_code'] = '';
+        $data['product_name'] = '';
         if (isset($id)) {
             $record = $this->ProductModel->get($id);
             if ($record != FALSE) {
-                $data['Product_Code'] = $record[0]->Product_Code;
-                $data['Product_Name'] = $record[0]->Product_Name;
+                $data['product_id'] = $record[0]->product_id;
+                $data['product_code'] = $record[0]->product_code;
+                $data['product_name'] = $record[0]->product_name;
             }
         }
 
@@ -36,10 +38,12 @@ Class Product extends CI_Controller {
     }
     
     public function search() {
-        $this->form_validation->set_rules('Product_Code', 'Product Code', 'trim');
-        $this->form_validation->set_rules('Product', 'Product Name', 'trim');
-        $data['Product_Code'] = $this->input->post('Product_Code');
-        $data['Product_Name'] = $this->input->post('Product_Name');
+        $this->form_validation->set_rules('product_id', 'Product ID', 'trim');
+        $this->form_validation->set_rules('product_code', 'Product Code', 'trim');
+        $this->form_validation->set_rules('product_name', 'Product Name', 'trim');
+        $data['product_id'] = $this->input->post('product_id');
+        $data['product_code'] = $this->input->post('product_code');
+        $data['product_name'] = $this->input->post('product_name');
         if ($this->form_validation->run() == FALSE) {
             $this->get_search($data);
         } else {
@@ -58,18 +62,19 @@ Class Product extends CI_Controller {
     
     public function get_search($data = null) {
         if (!isset($data)) {
-            $data['Product_Code'] = '';
-            $data['Product_Name'] = '';
+            $data['product_id'] = '';
+            $data['product_code'] = '';
+            $data['product_name'] = '';
         }
 
         $this->load->view('product/search', $data);
     }
     
     public function insert() {
-        $this->form_validation->set_rules('Product_Code', 'Product Code', 'trim|required|is_unique[Product.Product_Code]');
-        $this->form_validation->set_rules('Product_Name', 'Product Name', 'trim|required');
-        $data['Product_Code'] = $this->input->post('Product_Code');
-        $data['Product_Name'] = $this->input->post('Product_Name');
+        $this->form_validation->set_rules('product_code', 'Product Code', 'trim|required|is_unique[product.product_code]');
+        $this->form_validation->set_rules('product_name', 'Product Name', 'trim|required');
+        $data['product_code'] = $this->input->post('product_code');
+        $data['product_name'] = $this->input->post('product_name');
         if ($this->form_validation->run() == FALSE) {
             $this->get_insert($data);
         } else {
@@ -77,10 +82,12 @@ Class Product extends CI_Controller {
             if ($result == FALSE) {
                 $data['status'] = 'failed';
                 $data['result'] = "Insert failed.";
+				$data['product_id'] = '';
                 $this->load->view('product/insert', $data);
             } else {
                 $data['status'] = 'success';
                 $data['result'] = "Insert success.";
+				$data['product_id'] = $result;
                 $this->load->view('product/insert', $data);
             }
         }
@@ -88,17 +95,20 @@ Class Product extends CI_Controller {
 
     public function get_insert($data = null) {
         if (!isset($data)) {
-            $data['Product_Code'] = '';
-            $data['Product_Name'] = '';
+            $data['product_id'] = '';
+            $data['product_code'] = '';
+            $data['product_name'] = '';
         }
         $this->load->view('product/insert', $data);
     }
     
     public function edit($data = null) {
-        $this->form_validation->set_rules('Product_Code', 'Product ID', 'trim|required');
-        $this->form_validation->set_rules('Product_Name', 'Product Name', 'trim|required');
-        $data['Product_Code'] = $this->input->post('Product_Code');
-        $data['Product_Name'] = $this->input->post('Product_Name');
+        $this->form_validation->set_rules('product_id', 'Product ID', 'trim|required');
+        $this->form_validation->set_rules('product_code', 'Product ID', 'trim|required');
+        $this->form_validation->set_rules('product_name', 'Product Name', 'trim|required');
+        $data['product_id'] = $this->input->post('product_id');
+        $data['product_code'] = $this->input->post('product_code');
+        $data['product_name'] = $this->input->post('product_name');
         if ($this->form_validation->run() == FALSE) {
             $this->get_insert($data);
         } else {
@@ -118,20 +128,15 @@ Class Product extends CI_Controller {
     public function get_edit($id = null) {
         if (isset($id)) {
             $record = $this->ProductModel->get($id);
-            if ($record != FALSE) {
-                $data['Product_Code'] = $record[0]->Product_Code;
-                $data['Product_Name'] = $record[0]->Product_Name;
+            if ($record != false) {
+                $data['product_id'] = $record[0]->product_id;
+                $data['product_code'] = $record[0]->product_code;
+                $data['product_name'] = $record[0]->product_name;
             }
         }
         $this->load->view('product/edit', $data);
     }
 
-    public function view($id) {
-        if (!isset($data)) {
-            $data['Product_Code'] = '';
-            $data['Product_Name'] = '';
-        }
-    }
     
     public function get_upload() {
         $this->load->view('product/upload');
