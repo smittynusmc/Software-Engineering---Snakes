@@ -1,7 +1,7 @@
 
 <div class="box box-default color-palette-box">
     <div class="box-header with-border">
-        <h3 class="box-title"> WBS Detail</h3>
+        <h3 class="box-title"> Sprint Detail</h3>
         <div>
             <?php include 'header.php'; ?>
         </div>
@@ -11,10 +11,8 @@
              
             <tbody>
               <tr>
-                <td class="detail-title">WBS ID:</td>
-                <td class="detail-info"><?php echo $WBS_ID;?></td>
-                <td class="detail-title">WBS Name:</td>
-                <td class="detail-info"><?php echo $WBS_Name;?></td>
+                <td class="detail-title">Sprint ID:</td>
+                <td class="detail-info"><?php echo $Sprint_ID;?></td>
               </tr>
               
             </tbody>
