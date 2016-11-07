@@ -10,10 +10,16 @@
             
             <tbody>
               <tr>
+                <td class="detail-title">Product ID:</td>
+                <td class="detail-info"><?php echo $product_id;?></td>
+                <td class="detail-title"></td>
+                <td class="detail-info"></td>
+              </tr>             
+			  <tr>
                 <td class="detail-title">Product Code:</td>
-                <td class="detail-info"><?php echo $Product_Code;?></td>
+                <td class="detail-info"><?php echo $product_code;?></td>
                 <td class="detail-title">Product Name:</td>
-                <td class="detail-info"><?php echo $Product_Name;?></td>
+                <td class="detail-info"><?php echo $product_name;?></td>
               </tr>             
             </tbody>
           </table>

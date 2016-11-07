@@ -67,13 +67,13 @@
                     <ul class="sidebar-menu">
                         <li class="header">MAIN NAVIGATION</li>
                         <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Project/index" target="content">Project</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Program/index" target="content">Program</a>
                         </li>
                         <li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Product/index" target="content">Product</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Bug/index" target="content">Bug</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/CPCR/index" target="content">CPCR</a>
                         </li>
                         <li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/WBS/index" target="content">WBS</a>

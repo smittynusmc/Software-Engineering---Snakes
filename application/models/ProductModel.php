@@ -3,7 +3,7 @@
 class ProductModel extends CI_Model {
 
     public function get($id) {
-        $result = $this->db->query("SELECT * FROM Product WHERE Product_Code = ?", array($id));
+        $result = $this->db->query("SELECT * FROM product WHERE product_id = ?", array($id));
         if ($result->num_rows() >= 1) {
             return $result->result();
         } else {
@@ -12,19 +12,24 @@ class ProductModel extends CI_Model {
     }
     
     public function search($data) {
-        $Product_Code = '';
-        if (isset($data['Product_Code'])) {
-            $Product_Code = $data['Product_Code'];
+        $product_id = '';
+        if (isset($data['product_id'])) {
+            $product_id = $data['product_id'];
         }
-        $Product_Name = '';
-        if (isset($data['Product_Name'])) {
-            $Product_Name = $data['Product_Name'];
+		$product_code = '';
+        if (isset($data['product_code'])) {
+            $product_code = $data['product_code'];
+        }
+        $product_name = '';
+        if (isset($data['product_name'])) {
+            $product_name = $data['product_name'];
         }
         $query = "SELECT * "
-                . "FROM Product "
-                . "WHERE (? = '' OR Product_Code =?) "
-                . " AND (? = '' OR Product_Name LIKE CONCAT('%',?,'%') )";
-        $inputs = array($Product_Code, $Product_Code, $Product_Name, $Product_Name);
+                . "FROM product "
+                . "WHERE (? = '' OR product_id =?) "
+                . " AND (? = '' OR product_code LIKE CONCAT('%',?,'%') )"
+                . " AND (? = '' OR product_name LIKE CONCAT('%',?,'%') )";
+        $inputs = array($product_id,$product_id, $product_code, $product_code, $product_name, $product_name);
 
         $result = $this->db->query($query, $inputs);
         if ($result->num_rows() >= 1) {
@@ -39,21 +44,21 @@ class ProductModel extends CI_Model {
         $cleaned = $this->cleanEmpty($data);
         $fields = implode(',', array_keys($cleaned));
         $value = implode(',', array_fill(0, count($cleaned), '?'));
-        $query = "INSERT INTO Product ({$fields}) VALUES({$value})";
-        if (!$this->db->query($query, $cleaned)) {
+		if (!$this->db->insert('product', $cleaned)) {
             return false;
         } else {
-            return true;
+            
+            return $this->db->insert_id();;
         }
     }
     
     public function update($data) {
         $cleaned = $this->cleanEmpty($data);
-        $Product_Code = $cleaned['Product_Code'];
-        unset($cleaned['Product_Code']);
+        $product_code = $cleaned['product_code'];
+        unset($cleaned['product_code']);
 
-        $this->db->where('Product_Code', $Product_Code);
-        if (!$this->db->update('Product', $cleaned)) {
+        $this->db->where('product_code', $product_code);
+        if (!$this->db->update('product', $cleaned)) {
             return false;
         } else {
             return true;
@@ -63,17 +68,17 @@ class ProductModel extends CI_Model {
     public function import($data) {
         $count_error = 0;
         $count_success = 0;
-        $column_names = array('Product_Code', 'Product_Name');
+        $column_names = array('product_code', 'product_name');
         array_walk($data, function(&$a) use ($column_names) {
             $a = array_combine($column_names, $a);
         });
         $db_debug = $this->db->db_debug;
         $this->db->db_debug = FALSE;
         foreach ($data as $record) {
-            if(empty($record['Product_Code']) || empty($record['Product_Name'])){
+            if(empty($record['product_code']) || empty($record['product_name'])){
                 $count_error++;
             }
-            elseif (!$this->db->insert('Product', $record)) {
+            elseif (!$this->db->insert('product', $record)) {
                 $count_error++;
             } else {
                 $count_success++;

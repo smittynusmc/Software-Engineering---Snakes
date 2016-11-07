@@ -13,12 +13,16 @@
                     <?php echo validation_errors(); ?>
                 </div>
                 <div class="form-group">
-                    <label for="Product_Code">Product Code</label>
-                    <input type="text" class="form-control" name="Product_Code" id="Product_Code" placeholder="Product Code" value="<?php echo $Product_Code;?>" readonly >
+                    <label for="product_id">Product ID</label>
+                    <input type="text" class="form-control" name="product_id" id="product_id" placeholder="Product ID" value="<?php echo $product_id;?>" readonly >
                 </div>
                 <div class="form-group">
-                    <label for="Product_Name">Product Name</label>
-                    <input type="text" class="form-control" name="Product_Name" id="Product_Name" placeholder="Product Name" value="<?php echo $Product_Name;?>">
+                    <label for="product_code">Product Code</label>
+                    <input type="text" class="form-control" name="product_code" id="product_code" placeholder="Product Code" value="<?php echo $product_code;?>" readonly >
+                </div>
+                <div class="form-group">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name" value="<?php echo $product_name;?>">
                 </div>
                 
             </div> 
@@ -32,7 +36,7 @@
             <?php
             if(isset($result)){
                 if(isset($status) && $status='success'){
-                    echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' archo='".base_url()."index.php/Product/index/{$Product_Code}' target ='content'> $result</button>";
+                    echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' archo='".base_url()."index.php/Product/index/{$product_id}' target ='content'> $result</button>";
                 }
                 else{
                     echo $result;
