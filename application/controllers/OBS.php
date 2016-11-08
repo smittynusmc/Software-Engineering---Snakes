@@ -39,10 +39,10 @@ Class OBS extends CI_Controller {
     }
     
     public function search() {
-        $this->form_validation->set_rules('obs_ID', 'Project ID', 'trim');
-        $this->form_validation->set_rules('program_ID', 'Project Name', 'trim');
-        $this->form_validation->set_rules('product_ID', 'Product ID', 'trim');
-        $this->form_validation->set_rules('wbs_ID', 'Product Name', 'trim');
+        $this->form_validation->set_rules('obs_ID', 'obs_ID', 'trim');
+        $this->form_validation->set_rules('program_ID', 'program_ID', 'trim');
+        $this->form_validation->set_rules('product_ID', 'product_ID', 'trim');
+        $this->form_validation->set_rules('wbs_ID', 'wbs_ID', 'trim');
         $data['obs_ID'] = $this->input->post('obs_ID');
         $data['program_ID'] = $this->input->post('program_ID');
         $data['product_ID'] = $this->input->post('product_ID');
