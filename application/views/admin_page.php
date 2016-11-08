@@ -83,7 +83,7 @@
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Development/index" target="content">Developement</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/obs/index" target="content">OBS</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/OBS/index" target="content">OBS</a>
                         </li>
                         <li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Sprint/index" target="content">Sprint</a>
