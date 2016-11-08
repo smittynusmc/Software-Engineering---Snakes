@@ -3,7 +3,7 @@
 Class OBSModel extends CI_Model {
 
     public function get($id) {
-        $result = $this->db->query("SELECT * FROM VOBS WHERE obs_ID = ?", array($id));
+        $result = $this->db->query("SELECT * FROM obs WHERE obs_ID = ?", array($id));
         if ($result->num_rows() >= 1) {
             return $result->result();
         } else {
