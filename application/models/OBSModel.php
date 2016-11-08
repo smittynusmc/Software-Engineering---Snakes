@@ -37,7 +37,6 @@ Class OBSModel extends CI_Model {
                 . " AND (? = '' OR wbs_ID LIKE CONCAT('%',?,'%') )"
                 ;
         $inputs = array($obs_ID, $obs_ID,
-            $obs_ID,$obs_ID,
             $program_ID, $program_ID,
             $product_ID, $product_ID,
             $wbs_ID, $wbs_ID,
