@@ -17,7 +17,7 @@
                     <input type="text" class="form-control" name="obs_id" id="obs_id" placeholder="OBS ID" value="<?php echo $obs_id;?>">
                 </div>
                 <div class="form-group">
-                    <label for="program_id">Project ID</label>
+                    <label for="program_id">Program ID</label>
                     <input type="text" class="form-control" name="program_id" id="program_id" placeholder="Program ID" value="<?php echo $program_id;?>">
                 </div>
                 <div class="form-group">
