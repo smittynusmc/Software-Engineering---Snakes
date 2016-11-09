@@ -21,17 +21,17 @@ Class OBS extends CI_Controller {
     }
     
     public function index($id=null) {
-        $data['obs_ID'] = '';
-        $data['program_ID'] = '';
-        $data['product_ID'] = '';
-        $data['wbs_ID'] = '';
+        $data['obs_id'] = '';
+        $data['program_id'] = '';
+        $data['product_id'] = '';
+        $data['wbs_id'] = '';
         if (isset($id)) {
             $record = $this->OBSModel->get($id);
             if ($record != FALSE) {
-                $data['obs_ID'] = $record[0]->obs_ID;
-                $data['program_ID'] = $record[0]->program_ID;
-                $data['product_ID'] = $record[0]->product_ID;
-                $data['wbs_ID'] = $record[0]->wbs_ID;
+                $data['obs_id'] = $record[0]->obs_id;
+                $data['program_id'] = $record[0]->program_id;
+                $data['product_id'] = $record[0]->product_id;
+                $data['wbs_id'] = $record[0]->wbs_id;
             }
         }
        
@@ -39,14 +39,14 @@ Class OBS extends CI_Controller {
     }
     
     public function search() {
-        $this->form_validation->set_rules('obs_ID', 'obs_ID', 'trim');
-        $this->form_validation->set_rules('program_ID', 'program_ID', 'trim');
-        $this->form_validation->set_rules('product_ID', 'product_ID', 'trim');
-        $this->form_validation->set_rules('wbs_ID', 'wbs_ID', 'trim');
-        $data['obs_ID'] = $this->input->post('obs_ID');
-        $data['program_ID'] = $this->input->post('program_ID');
-        $data['product_ID'] = $this->input->post('product_ID');
-        $data['wbs_ID'] = $this->input->post('wbs_ID');
+        $this->form_validation->set_rules('obs_id', 'obs_id', 'trim');
+        $this->form_validation->set_rules('program_id', 'program_id', 'trim');
+        $this->form_validation->set_rules('product_id', 'product_id', 'trim');
+        $this->form_validation->set_rules('wbs_id', 'wbs_id', 'trim');
+        $data['obs_id'] = $this->input->post('obs_id');
+        $data['program_id'] = $this->input->post('program_id');
+        $data['product_id'] = $this->input->post('product_id');
+        $data['wbs_id'] = $this->input->post('wbs_id');
 
         if ($this->form_validation->run() == FALSE) {
             $this->get_search($data);
@@ -66,10 +66,10 @@ Class OBS extends CI_Controller {
 
     public function get_search($data = null) {
         if (!isset($data)) {
-            $data['obs_ID'] = '';
-            $data['program_ID'] = '';
-            $data['product_ID'] = '';
-            $data['wbs_ID'] = '';
+            $data['obs_id'] = '';
+            $data['program_id'] = '';
+            $data['product_id'] = '';
+            $data['wbs_id'] = '';
         }
 
         $this->load->view('obs/search', $data);
