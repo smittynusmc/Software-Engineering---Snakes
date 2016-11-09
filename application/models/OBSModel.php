@@ -3,7 +3,7 @@
 Class OBSModel extends CI_Model {
 
     public function get($id) {
-        $result = $this->db->query("SELECT * FROM obs WHERE obs_ID = ?", array($id));
+        $result = $this->db->query("SELECT * FROM obs WHERE obs_id = ?", array($id));
         if ($result->num_rows() >= 1) {
             return $result->result();
         } else {
@@ -12,34 +12,34 @@ Class OBSModel extends CI_Model {
     }
 
     public function search($data) {
-        $obs_ID = '';
-        if (isset($data['obs_ID'])) {
-            $obs_ID = $data['obs_ID'];
+        $obs_id = '';
+        if (isset($data['obs_id'])) {
+            $obs_id = $data['obs_id'];
         }
-        $program_ID = '';
-        if (isset($data['program_ID'])) {
-            $program_ID = $data['program_ID'];
+        $program_id = '';
+        if (isset($data['program_id'])) {
+            $program_id = $data['program_id'];
         }
-        $product_ID = '';
-        if (isset($data['product_ID'])) {
-            $product_ID = $data['product_ID'];
+        $product_id = '';
+        if (isset($data['product_id'])) {
+            $product_id = $data['product_id'];
         }
-        $wbs_ID = '';
-        if (isset($data['wbs_ID'])) {
-            $wbs_ID = $data['wbs_ID'];
+        $wbs_id = '';
+        if (isset($data['wbs_id'])) {
+            $wbs_id = $data['wbs_id'];
         }
         
         $query = "SELECT * "
                 . "FROM obs "
-                . "WHERE (? = '' OR obs_ID =?) "
-                . " AND (? = '' OR program_ID LIKE CONCAT('%',?,'%') )"
-                . " AND (? = '' OR product_ID =?) "
-                . " AND (? = '' OR wbs_ID LIKE CONCAT('%',?,'%') )"
+                . "WHERE (? = '' OR obs_id =?) "
+                . " AND (? = '' OR program_id LIKE CONCAT('%',?,'%') )"
+                . " AND (? = '' OR product_id =?) "
+                . " AND (? = '' OR wbs_id LIKE CONCAT('%',?,'%') )"
                 ;
-        $inputs = array($obs_ID, $obs_ID,
-            $program_ID, $program_ID,
-            $product_ID, $product_ID,
-            $wbs_ID, $wbs_ID,
+        $inputs = array($obs_id, $obs_id,
+            $program_id, $program_id,
+            $product_id, $product_id,
+            $wbs_id, $wbs_id,
             );
 
         $result = $this->db->query($query, $inputs);
@@ -55,7 +55,7 @@ Class OBSModel extends CI_Model {
     public function import($data) {
         $count_error = 0;
         $count_success = 0;
-        $column_names = array("obs_ID","program_ID","product_ID","wbs_ID"
+        $column_names = array("obs_id","program_id","product_id","wbs_id"
             );
         array_walk($data, function(&$a) use ($column_names) {
             $a = array_combine($column_names, $a);
