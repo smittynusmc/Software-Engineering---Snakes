@@ -2,6 +2,22 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/controllers/Project.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/models/DevelopmentModel.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/controllers/Product.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/development/header.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/project/search.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/project/insert.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/product/view.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/controllers/Development.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/controllers/WBS.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/project/upload.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/development/view.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/project/view.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/project/edit.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/project/header.php</file>
+            <file>file:/C:/xampp/htdocs/Software-Engineering---Snakes/application/views/wbs/view.php</file>
+        </group>
     </open-files>
 </project-private>
