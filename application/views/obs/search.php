@@ -1,5 +1,3 @@
-
-
 <div class="modal-dialog ">
     <div class="modal-content">
         <div class="modal-header">
@@ -17,16 +15,28 @@
                     <input type="text" class="form-control" name="obs_id" id="obs_id" placeholder="OBS ID" value="<?php echo $obs_id;?>">
                 </div>
                 <div class="form-group">
-                    <label for="program_id">Program ID</label>
-                    <input type="text" class="form-control" name="program_id" id="program_id" placeholder="Program ID" value="<?php echo $program_id;?>">
+                    <label for="program_code">Program Code</label>
+                    <input type="text" class="form-control" name="program_code" id="program_code" placeholder="Program Code" value="<?php echo $program_code;?>">
+                </div>
+				<div class="form-group">
+                    <label for="program_name">Program Name</label>
+                    <input type="text" class="form-control" name="program_name" id="program_name" placeholder="Program Name" value="<?php echo $program_name;?>">
                 </div>
                 <div class="form-group">
-                    <label for="product_id">Product ID</label>
-                    <input type="text" class="form-control" name="product_id" id="Product_Code" placeholder="Product ID" value="<?php echo $product_id;?>">
+                    <label for="product_code">Product Code</label>
+                    <input type="text" class="form-control" name="product_code" id="product_code" placeholder="Product Code" value="<?php echo $product_code;?>">
+                </div>
+				<div class="form-group">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name" value="<?php echo $product_name;?>">
                 </div>
                 <div class="form-group">
-                    <label for="wbs_id">WBS ID</label>
-                    <input type="text" class="form-control" name="wbs_id" id="product_id" placeholder="WBS ID" value="<?php echo $wbs_id;?>">
+                    <label for="wbs_code">WBS Code</label>
+                    <input type="text" class="form-control" name="wbs_code" id="wbs_code" placeholder="WBS Name" value="<?php echo $wbs_code;?>">
+                </div>
+				<div class="form-group">
+                    <label for="wbs_name">WBS Name</label>
+                    <input type="text" class="form-control" name="wbs_name" id="wbs_name" placeholder="WBS Name" value="<?php echo $wbs_name;?>">
                 </div>
                 
                 
@@ -43,11 +53,11 @@
                 if(isset($status) && $status=='success'){
                     foreach ($result as $record){
                         echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' archo='".base_url()."index.php/OBS/index/{$record->obs_id}'target ='content'>  "
-                        . "{$record->program_id}"
+                        . "{$record->program_code} - {$record->program_name} "
                         . "<br>"
-                        . "{$record->product_id}"
+                        . "{$record->product_code} - {$record->product_name}"
                         . "<br>"
-                        . "{$record->wbs_id}"        
+                        . "{$record->wbs_code}  - {$record->wbs_name}"        
                         . "</button>";
                     }
                 }
