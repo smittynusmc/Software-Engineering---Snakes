@@ -32,7 +32,7 @@
         <div class="modal-footer" id="wbs_search-result">
             <?php
             if(isset($result)){
-                if(isset($status) && $status='success'){
+                if(isset($status) && $status=='success'){
                     echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' archo='".base_url()."index.php/WBS/index/{$wbs_id}' target ='content'> $result</button>";
                 }
                 else{

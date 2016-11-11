@@ -35,7 +35,7 @@
         <div class="modal-footer" id="product_search-result">
             <?php
             if(isset($result)){
-                if(isset($status) && $status='success'){
+                if(isset($status) && $status=='success'){
                     echo "<button class='btn btn-default btn-block btn-loadrecord' type='button' archo='".base_url()."index.php/Product/index/{$product_id}' target ='content'> $result</button>";
                 }
                 else{

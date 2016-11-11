@@ -13,14 +13,18 @@
               <tr>
                 <td class="detail-title">OBS ID:</td>
                 <td class="detail-info"><?php echo $obs_id;?></td>
-                <td class="detail-title">Program ID</td>
-                <td class="detail-info"><?php echo $program_id;?></td>
+			  <tr>
+			  </tr>
+                <td class="detail-title">Program:</td>
+                <td class="detail-info"><?php echo $program_code."-".$program_name;?></td>
               </tr>
               <tr>
-                <td class="detail-title">Product ID:</td>
-                <td class="detail-info"><?php echo $product_id;?></td>
-                <td class="detail-title">WBS ID:</td>
-                <td class="detail-info"><?php echo $wbs_id;?></td>
+                <td class="detail-title">Product:</td>
+                <td class="detail-info"><?php echo $product_name;?></td>
+			  <tr>
+			  </tr>
+                <td class="detail-title">WBS:</td>
+                <td class="detail-info"><?php echo $wbs_code."-".$wbs_name;?></td>
               </tr>
               
             </tbody>
