@@ -73,17 +73,17 @@
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Product/index" target="content">Product</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/CPCR/index" target="content">CPCR</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/WBS/index" target="content">WBS</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/WBS/index" target="content">WBS</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/OBS/index" target="content">OBS</a>
+                        </li>
+                        <li class="treeview">
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/CPCR/index" target="content">CPCR</a>
                         </li>
                         
                         <li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Development/index" target="content">Developement</a>
-                        </li>
-                        <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/OBS/index" target="content">OBS</a>
                         </li>
                         <li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Sprint/index" target="content">Sprint</a>
