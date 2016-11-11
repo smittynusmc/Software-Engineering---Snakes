@@ -52,19 +52,19 @@ Class CPCR extends CI_Controller {
     
     public function search() {
         $this->form_validation->set_rules('cpcr_id', 'CPCR ID', 'trim');
-        $this->form_validation->set_rules('program_code', 'Program Code', 'trim');
         $this->form_validation->set_rules('program_name', 'Program Name', 'trim');
-        $this->form_validation->set_rules('product_code', 'Product Code', 'trim');
         $this->form_validation->set_rules('product_name', 'Product Name', 'trim');
-        $this->form_validation->set_rules('wbs_code', 'Wbs Code', 'trim');
-        $this->form_validation->set_rules('wbs_name', 'Wbs Name', 'trim');
+        $this->form_validation->set_rules('wbs_name', 'WBS Name', 'trim');
+		$this->form_validation->set_rules('cpcr_status', 'CPCR Status', 'trim');
+		$this->form_validation->set_rules('updated', 'Updated', 'trim');
+		$this->form_validation->set_rules('created', 'Created', 'trim');
         $data['cpcr_id'] = $this->input->post('cpcr_id');
-        $data['program_code'] = $this->input->post('program_code');
         $data['program_name'] = $this->input->post('program_name');
-        $data['product_code'] = $this->input->post('product_code');
         $data['product_name'] = $this->input->post('product_name');
-        $data['wbs_code'] = $this->input->post('wbs_code');
         $data['wbs_name'] = $this->input->post('wbs_name');
+		$data['cpcr_status'] = $this->input->post('cpcr_status');
+		$data['updated'] = $this->input->post('updated');
+		$data['created'] = $this->input->post('created');
 
         if ($this->form_validation->run() == FALSE) {
             $this->get_search($data);
@@ -85,12 +85,12 @@ Class CPCR extends CI_Controller {
     public function get_search($data = null) {
         if (!isset($data)) {
 			$data['cpcr_id'] = '';
-			$data['program_code'] = '';
 			$data['program_name'] = '';
-			$data['product_code'] = '';
 			$data['product_name'] = '';
-			$data['wbs_code'] = '';
 			$data['wbs_name'] = '';
+			$data['cpcr_status'] = '';
+			$data['updated'] = '';
+			$data['created'] = '';
         }
 
         $this->load->view('cpcr/search', $data);

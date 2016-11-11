@@ -12,52 +12,52 @@ Class CPCRModel extends CI_Model {
     }
 
     public function search($data) {
-        $obs_id = '';
-        if (isset($data['obs_id'])) {
-            $obs_id = $data['obs_id'];
-        }
-		$program_code = '';
-        if (isset($data['program_code'])) {
-            $program_code = $data['program_code'];
+        $cpcr_id = '';
+        if (isset($data['cpcr_id'])) {
+            $cpcr_id = $data['cpcr_id'];
         }
         $program_name = '';
         if (isset($data['program_name'])) {
             $program_name = $data['program_name'];
         }
-        $product_code = '';
-        if (isset($data['product_code'])) {
-            $product_code = $data['product_code'];
-        }
         $product_name = '';
         if (isset($data['product_name'])) {
             $product_name = $data['product_name'];
-        }
-		$wbs_code = '';
-        if (isset($data['wbs_code'])) {
-            $wbs_code = $data['wbs_code'];
         }
 		$wbs_name = '';
         if (isset($data['wbs_name'])) {
             $wbs_name = $data['wbs_name'];
         }
+		$cpcr_status = '';
+        if (isset($data['cpcr_status'])) {
+            $cpcr_status = $data['cpcr_status'];
+        }
+		$updated = '1900-01-01';
+        if (isset($data['updated']) && !empty($data['updated'])) {
+            $updated = $data['updated'];
+        }
+        $created = '2900-12-31';
+        if (isset($data['created']) && !empty($data['created'])) {
+            $created = $data['created'];
+        }
         
         $query = "SELECT * "
-                . "FROM view_obs "
-                . "WHERE (? = '' OR obs_id =?) "
-                . " AND (? = '' OR program_code LIKE CONCAT('%',?,'%') )"
+                . "FROM view_cpcr "
+                . "WHERE (? = '' OR cpcr_id =?) "
                 . " AND (? = '' OR program_name LIKE CONCAT('%',?,'%') )"
-                . " AND (? = '' OR product_code LIKE CONCAT('%',?,'%') )"
                 . " AND (? = '' OR product_name LIKE CONCAT('%',?,'%') )"
-                . " AND (? = '' OR wbs_code LIKE CONCAT('%',?,'%') )"
                 . " AND (? = '' OR wbs_name LIKE CONCAT('%',?,'%') )"
+				. " AND (? = '' OR cpcr_status LIKE CONCAT('%',?,'%') )"
+				. " AND (updated >= ? OR updated <= ? )"
+				. " AND (created >= ? OR created <= ? )"
                 ;
-        $inputs = array($obs_id, $obs_id,
-            $program_code, $program_code,
+        $inputs = array($cpcr_id, $cpcr_id,
             $program_name, $program_name,
-            $product_code, $product_code,
             $product_name, $product_name,
-            $wbs_code, $wbs_code,
-            $wbs_name, $wbs_name
+            $wbs_name, $wbs_name,
+			$cpcr_status, $cpcr_status,
+			$updated, $updated,
+			$created, $created
             );
 
         $result = $this->db->query($query, $inputs);
