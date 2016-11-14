@@ -3,7 +3,7 @@
 class SprintModel extends CI_Model {
 
     public function get($id) {
-        $result = $this->db->query("SELECT * FROM Product WHERE Sprint_ID = ?", array($id));
+        $result = $this->db->query("SELECT * FROM sprint WHERE sprint_ID = ?", array($id));
         if ($result->num_rows() >= 1) {
             return $result->result();
         } else {
@@ -12,9 +12,9 @@ class SprintModel extends CI_Model {
     }
     
     public function search($data) {
-        $Product_Code = '';
-        if (isset($data['Product_Code'])) {
-            $Product_Code = $data['Product_Code'];
+        $sprint_id = '';
+        if (isset($data['sprint_id'])) {
+            $sprint_id = $data['sprint_id'];
         }
         $Product_Name = '';
         if (isset($data['Product_Name'])) {

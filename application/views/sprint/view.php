@@ -12,7 +12,11 @@
             <tbody>
               <tr>
                 <td class="detail-title">Sprint ID:</td>
-                <td class="detail-info"><?php echo $Sprint_ID;?></td>
+                <td class="detail-info"><?php echo $sprint_id;?></td>
+              </tr>
+			  <tr>
+                <td class="detail-title">Sprint Name:</td>
+                <td class="detail-info"><?php echo $sprint_name;?></td>
               </tr>
               
             </tbody>
