@@ -14,7 +14,6 @@ Class Sprint extends CI_Controller {
         $this->load->library('encryption');
 // Load session library
         $this->load->library('session');
-
 // Load database
         $this->load->model('SprintModel');
 // Load file helper library        
@@ -22,13 +21,15 @@ Class Sprint extends CI_Controller {
     }
 
     public function index($id = null) {
-        $data['Sprint_ID'] = '';
-//        if (isset($id)) {
-//            $record = $this->SprintModel->get($id);
-//            if ($record != FALSE) {
-//                $data['Sprint_ID'] = $record[0]->Sprint_ID;
-//            }
-//        }
+        $data['sprint_id'] = '';
+		$data['sprint_name'] = '';
+        if (isset($id)) {
+            $record = $this->SprintModel->get($id);
+           if ($record != FALSE) {
+               $data['sprint_id'] = $record[0]->sprint_id;
+			   $data['sprint_name'] = $record[0]->sprint_name;
+            }
+        }
 
         $this->load->view('sprint/view', $data);
     }
