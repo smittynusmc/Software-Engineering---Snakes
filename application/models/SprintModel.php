@@ -73,7 +73,7 @@ class SprintModel extends CI_Model {
             if(empty($record['sprint_id']) || empty($record['sprint_Name'])){
                 $count_error++;
             }
-            elseif (!$this->db->insert('Sprint', $record)) {
+            elseif (!$this->db->insert('sprint', $record)) {
                 $count_error++;
             } else {
                 $count_success++;
