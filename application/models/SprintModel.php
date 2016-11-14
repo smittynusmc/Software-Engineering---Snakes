@@ -16,15 +16,15 @@ class SprintModel extends CI_Model {
         if (isset($data['sprint_id'])) {
             $sprint_id = $data['sprint_id'];
         }
-        $Product_Name = '';
-        if (isset($data['Product_Name'])) {
-            $Product_Name = $data['Product_Name'];
+        $sprint_name = '';
+        if (isset($data['sprint_name'])) {
+            $sprint_name = $data['sprint_name'];
         }
         $query = "SELECT * "
-                . "FROM Product "
-                . "WHERE (? = '' OR Product_Code =?) "
-                . " AND (? = '' OR Product_Name LIKE CONCAT('%',?,'%') )";
-        $inputs = array($Product_Code, $Product_Code, $Product_Name, $Product_Name);
+                . "FROM sprint "
+                . "WHERE (? = '' OR sprint_id =?) "
+                . " AND (? = '' OR sprint_name LIKE CONCAT('%',?,'%') )";
+        $inputs = array($sprint_id, $sprint_id, $sprint_name, $sprint_name);
 
         $result = $this->db->query($query, $inputs);
         if ($result->num_rows() >= 1) {
@@ -39,7 +39,7 @@ class SprintModel extends CI_Model {
         $cleaned = $this->cleanEmpty($data);
         $fields = implode(',', array_keys($cleaned));
         $value = implode(',', array_fill(0, count($cleaned), '?'));
-        $query = "INSERT INTO Product ({$fields}) VALUES({$value})";
+        $query = "INSERT INTO sprint ({$fields}) VALUES({$value})";
         if (!$this->db->query($query, $cleaned)) {
             return false;
         } else {
@@ -49,11 +49,11 @@ class SprintModel extends CI_Model {
     
     public function update($data) {
         $cleaned = $this->cleanEmpty($data);
-        $Product_Code = $cleaned['Product_Code'];
-        unset($cleaned['Product_Code']);
+        $sprint_id = $cleaned['sprint_id'];
+        unset($cleaned['sprint_id']);
 
-        $this->db->where('Product_Code', $Product_Code);
-        if (!$this->db->update('Product', $cleaned)) {
+        $this->db->where('sprint_id', $sprint_id);
+        if (!$this->db->update('sprint', $cleaned)) {
             return false;
         } else {
             return true;
@@ -63,17 +63,17 @@ class SprintModel extends CI_Model {
     public function import($data) {
         $count_error = 0;
         $count_success = 0;
-        $column_names = array('Product_Code', 'Product_Name');
+        $column_names = array('sprint_id', 'sprint_Name');
         array_walk($data, function(&$a) use ($column_names) {
             $a = array_combine($column_names, $a);
         });
         $db_debug = $this->db->db_debug;
         $this->db->db_debug = FALSE;
         foreach ($data as $record) {
-            if(empty($record['Product_Code']) || empty($record['Product_Name'])){
+            if(empty($record['sprint_id']) || empty($record['sprint_Name'])){
                 $count_error++;
             }
-            elseif (!$this->db->insert('Product', $record)) {
+            elseif (!$this->db->insert('Sprint', $record)) {
                 $count_error++;
             } else {
                 $count_success++;
