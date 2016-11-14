@@ -14,7 +14,6 @@ Class Sprint extends CI_Controller {
         $this->load->library('encryption');
 // Load session library
         $this->load->library('session');
-
 // Load database
         $this->load->model('SprintModel');
 // Load file helper library        
@@ -22,117 +21,119 @@ Class Sprint extends CI_Controller {
     }
 
     public function index($id = null) {
-        $data['Sprint_ID'] = '';
-//        if (isset($id)) {
-//            $record = $this->SprintModel->get($id);
-//            if ($record != FALSE) {
-//                $data['Sprint_ID'] = $record[0]->Sprint_ID;
-//            }
-//        }
+        $data['sprint_id'] = '';
+		$data['sprint_name'] = '';
+        if (isset($id)) {
+            $record = $this->SprintModel->get($id);
+           if ($record != FALSE) {
+               $data['sprint_id'] = $record[0]->sprint_id;
+			   $data['sprint_name'] = $record[0]->sprint_name;
+            }
+        }
 
         $this->load->view('sprint/view', $data);
     }
     
     public function search() {
-        $this->form_validation->set_rules('Product_Code', 'Product Code', 'trim');
-        $this->form_validation->set_rules('Product', 'Product Name', 'trim');
-        $data['Product_Code'] = $this->input->post('Product_Code');
-        $data['Product_Name'] = $this->input->post('Product_Name');
+        $this->form_validation->set_rules('sprint_id', 'Sprint ID', 'trim');
+        $this->form_validation->set_rules('sprint_name', 'Sprint Name', 'trim');
+        $data['sprint_id'] = $this->input->post('sprint_id');
+        $data['sprint_name'] = $this->input->post('sprint_name');
         if ($this->form_validation->run() == FALSE) {
             $this->get_search($data);
         } else {
-            $result = $this->ProductModel->search($data);
+            $result = $this->SprintModel->search($data);
             if ($result == FALSE) {
                 $data['status'] = 'failed';
-                $data['result'] = "0 product found.";
-                $this->load->view('product/search', $data);
+                $data['result'] = "0 sprint found.";
+                $this->load->view('sprint/search', $data);
             } else {
                 $data['status'] = 'success';
                 $data['result'] = $result;
-                $this->load->view('product/search', $data);
+                $this->load->view('sprint/search', $data);
             }
         }
     }
     
     public function get_search($data = null) {
         if (!isset($data)) {
-            $data['Product_Code'] = '';
-            $data['Product_Name'] = '';
+            $data['sprint_id'] = '';
+            $data['sprint_name'] = '';
         }
 
-        $this->load->view('product/search', $data);
+        $this->load->view('sprint/search', $data);
     }
     
     public function insert() {
-        $this->form_validation->set_rules('Product_Code', 'Product Code', 'trim|required|is_unique[Product.Product_Code]');
-        $this->form_validation->set_rules('Product_Name', 'Product Name', 'trim|required');
-        $data['Product_Code'] = $this->input->post('Product_Code');
-        $data['Product_Name'] = $this->input->post('Product_Name');
+        $this->form_validation->set_rules('sprint_id', 'Sprint ID', 'trim|required|is_unique[sprint.sprint_id]');
+        $this->form_validation->set_rules('sprint_name', 'Sprint Name', 'trim|required');
+        $data['sprint_id'] = $this->input->post('sprint_id');
+        $data['sprint_name'] = $this->input->post('sprint_name');
         if ($this->form_validation->run() == FALSE) {
             $this->get_insert($data);
         } else {
-            $result = $this->ProductModel->insert($data);
+            $result = $this->SprintModel->insert($data);
             if ($result == FALSE) {
                 $data['status'] = 'failed';
                 $data['result'] = "Insert failed.";
-                $this->load->view('product/insert', $data);
+                $this->load->view('sprint/insert', $data);
             } else {
                 $data['status'] = 'success';
                 $data['result'] = "Insert success.";
-                $this->load->view('product/insert', $data);
+                $this->load->view('sprint/insert', $data);
             }
         }
     }
 
     public function get_insert($data = null) {
         if (!isset($data)) {
-            $data['Product_Code'] = '';
-            $data['Product_Name'] = '';
+            $data['sprint_id'] = '';
+            $data['sprint_name'] = '';
         }
-        $this->load->view('product/insert', $data);
+        $this->load->view('sprint/insert', $data);
     }
     
     public function edit($data = null) {
-        $this->form_validation->set_rules('Product_Code', 'Product ID', 'trim|required');
-        $this->form_validation->set_rules('Product_Name', 'Product Name', 'trim|required');
-        $data['Product_Code'] = $this->input->post('Product_Code');
-        $data['Product_Name'] = $this->input->post('Product_Name');
+        $this->form_validation->set_rules('sprint_id', 'Sprint ID', 'trim|required');
+        $this->form_validation->set_rules('sprint_name', 'Sprint Name', 'trim|required');
+        $data['sprint_id'] = $this->input->post('sprint_id');
+        $data['sprint_name'] = $this->input->post('sprint_name');
         if ($this->form_validation->run() == FALSE) {
             $this->get_insert($data);
         } else {
-            $result = $this->ProductModel->update($data);
+            $result = $this->SprintModel->update($data);
             if ($result == FALSE) {
                 $data['status'] = 'failed';
                 $data['result'] = "Edit failed.";
-                $this->load->view('product/edit', $data);
+                $this->load->view('sprint/edit', $data);
             } else {
                 $data['status'] = 'success';
                 $data['result'] = "Edit success.";
-                $this->load->view('product/edit', $data);
+                $this->load->view('sprint/edit', $data);
             }
         }
     }
 
     public function get_edit($id = null) {
         if (isset($id)) {
-            $record = $this->ProductModel->get($id);
+            $record = $this->SprintModel->get($id);
             if ($record != FALSE) {
-                $data['Product_Code'] = $record[0]->Product_Code;
-                $data['Product_Name'] = $record[0]->Product_Name;
+                $data['sprint_id'] = $record[0]->sprint_id;
+                $data['sprint_name'] = $record[0]->sprint_name;
             }
         }
-        $this->load->view('product/edit', $data);
+        $this->load->view('sprint/edit', $data);
     }
 
     public function view($id) {
         if (!isset($data)) {
-            $data['Product_Code'] = '';
-            $data['Product_Name'] = '';
+            $data['sprint_id'] = '';
+            $data['sprint_name'] = '';
         }
     }
     
     public function get_upload() {
-        $this->load->view('product/upload');
+        $this->load->view('sprint/upload');
     }
 
     public function upload() {
@@ -147,7 +148,7 @@ Class Sprint extends CI_Controller {
         if (!$this->upload->do_upload('csv')) {
             $data['status'] = 'fail';
             $data['result'] = $this->upload->display_errors();
-            $this->load->view('product/upload',$data);
+            $this->load->view('sprint/upload',$data);
         } else {
             $upload_info = $this->upload->data();
             $csvdata = array_map('str_getcsv', file($upload_info['full_path'])); 
@@ -156,9 +157,9 @@ Class Sprint extends CI_Controller {
             }
             $data['status'] = 'success';
             $data['has_header'] = $has_header;
-            $result = $this->ProductModel->import($csvdata);
+            $result = $this->SprintModel->import($csvdata);
             $data['result'] = "{$result['success']} rows inserted, {$result['error']} errors";
-            $this->load->view('product/upload', $data);
+            $this->load->view('sprint/upload', $data);
         }
         
     }
