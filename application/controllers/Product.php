@@ -110,7 +110,7 @@ Class Product extends CI_Controller {
         $data['product_code'] = $this->input->post('product_code');
         $data['product_name'] = $this->input->post('product_name');
         if ($this->form_validation->run() == FALSE) {
-            $this->get_insert($data);
+            $this->get_edit($data['product_id']);
         } else {
             $result = $this->ProductModel->update($data);
             if ($result == FALSE) {

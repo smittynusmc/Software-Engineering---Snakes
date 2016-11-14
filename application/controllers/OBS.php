@@ -54,8 +54,10 @@ Class OBS extends CI_Controller {
     }
 	
 	private function debuglog($mess,$data=null){
-		write_file($this->log_path,print_r($data,true));
+		write_file($this->log_path,"\n".$mess.":\n".print_r($data,true),'a');
 	}
+	
+	
     
     public function search() {
         $this->form_validation->set_rules('obs_id', 'OBS ID', 'trim');
@@ -206,7 +208,6 @@ Class OBS extends CI_Controller {
             $this->get_edit($data['obs_id']);
         } else {
             $result = $this->OBSModel->update($data);
-			$this->debuglog('after update obs data:',$data);
 			$data['program'] = $this->CommonModel->getTable('program');
 			$data['product'] = $this->CommonModel->getTable('product');
 			$data['wbs'] = $this->CommonModel->getTable('wbs');

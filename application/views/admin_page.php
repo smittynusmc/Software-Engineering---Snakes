@@ -17,6 +17,7 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/select2/select2.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/main.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -88,6 +89,9 @@
                         <li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Sprint/index" target="content">Sprint</a>
                         </li>
+						<li class="treeview">
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Capability/index" target="content">Capability</a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -133,6 +137,8 @@
         <script src="<?php echo base_url(); ?>plugins/daterangepicker/daterangepicker.js"></script>
         <!-- datepicker -->
         <script src="<?php echo base_url(); ?>plugins/datepicker/bootstrap-datepicker.js"></script>
+		<!-- Select2 -->
+        <script src="<?php echo base_url(); ?>plugins/select2/select2.full.min.js"></script>
         <!-- Bootstrap WYSIHTML5 -->
         <script src="<?php echo base_url(); ?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
         <!-- Slimscroll -->
