@@ -7,7 +7,7 @@
             <h4 class="modal-title" id="capability_edit-title"> Edit capability</h4>
         </div>
         <div class="modal-body" id="capability_edit-body">
-            <?php echo form_open('capability/edit',Array('id'=>'capability_edit_form')); ?>
+            <?php echo form_open('Capability/edit',Array('id'=>'capability_edit_form')); ?>
             <div class="box-body" >
                 <div class="form-error">
                     <?php echo validation_errors(); ?>
@@ -17,7 +17,7 @@
                     <input type="text" class="form-control" name="capability_id" id="capability_id" placeholder="Capability ID" value="<?php echo $capability_id;?>" readonly >
                 </div>
                 <div class="form-group">
-                    <label for="capability_name">capability Name</label>
+                    <label for="capability_name">Capability Name</label>
                     <input type="text" class="form-control" name="capability_name" id="capability_name" placeholder="Capability Name" value="<?php echo $capability_name;?>">
                 </div>
                 

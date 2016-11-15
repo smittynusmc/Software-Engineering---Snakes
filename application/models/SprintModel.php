@@ -43,7 +43,7 @@ class SprintModel extends CI_Model {
         if (!$this->db->query($query, $cleaned)) {
             return false;
         } else {
-            return true;
+            return $this->db->insert_id();
         }
     }
     

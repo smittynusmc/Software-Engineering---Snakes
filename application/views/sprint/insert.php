@@ -14,10 +14,6 @@
                     <?php echo validation_errors(); ?>
                 </div>
                 <div class="form-group">
-                    <label for="sprint_id">Sprint ID</label>
-                    <input type="text" class="form-control" name="sprint_id" id="sprint_id" placeholder="Sprint Code" value="<?php echo $sprint_id;?>">
-                </div>
-                <div class="form-group">
                     <label for="sprint_name">Sprint Name</label>
                     <input type="text" class="form-control" name="sprint_name" id="sprint_name" placeholder="Sprint Name" value="<?php echo $sprint_name;?>">
                 </div>
