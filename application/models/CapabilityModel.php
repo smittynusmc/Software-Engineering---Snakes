@@ -43,14 +43,18 @@ class CapabilityModel extends CI_Model {
             return false;
         } else {
             
-            return $this->db->insert_id();;
+            return $this->db->insert_id();
         }
     }
     
     public function update($data) {
         $cleaned = $this->cleanEmpty($data);
+		$capability_id = $cleaned['capability_id'];
+        unset($cleaned['capability_id']);
+
+        $this->db->where('capability_id', $capability_id);
         if (!$this->db->update('capability', $cleaned)) {
-            return false;
+            return false;	
         } else {
             return true;
         }

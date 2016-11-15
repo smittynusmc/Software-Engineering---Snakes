@@ -65,9 +65,7 @@ Class Sprint extends CI_Controller {
     }
     
     public function insert() {
-        $this->form_validation->set_rules('sprint_id', 'Sprint ID', 'trim|required|is_unique[sprint.sprint_id]');
         $this->form_validation->set_rules('sprint_name', 'Sprint Name', 'trim|required');
-        $data['sprint_id'] = $this->input->post('sprint_id');
         $data['sprint_name'] = $this->input->post('sprint_name');
         if ($this->form_validation->run() == FALSE) {
             $this->get_insert($data);
@@ -80,6 +78,7 @@ Class Sprint extends CI_Controller {
             } else {
                 $data['status'] = 'success';
                 $data['result'] = "Insert success.";
+				$data['sprint_id'] = $result;
                 $this->load->view('sprint/insert', $data);
             }
         }
@@ -87,7 +86,7 @@ Class Sprint extends CI_Controller {
 
     public function get_insert($data = null) {
         if (!isset($data)) {
-            $data['sprint_id'] = '';
+			$data['sprint_id'] = '';
             $data['sprint_name'] = '';
         }
         $this->load->view('sprint/insert', $data);
@@ -109,6 +108,7 @@ Class Sprint extends CI_Controller {
             } else {
                 $data['status'] = 'success';
                 $data['result'] = "Edit success.";
+				
                 $this->load->view('sprint/edit', $data);
             }
         }

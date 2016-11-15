@@ -57,7 +57,7 @@ Class ProgramModel extends CI_Model {
             return false;
         } else {
             
-            return $this->db->insert_id();;
+            return $this->db->insert_id();
         }
     }
 
