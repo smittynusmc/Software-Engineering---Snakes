@@ -41,14 +41,30 @@ Class WBSModel extends CI_Model {
         }
     }
 
-    public function insert($data) {
+    public function insert($data,$overwrite = false,$return_id = false) {
         $cleaned = $this->cleanEmpty($data);
-        if (!$this->db->insert('wbs', $cleaned)) {
-            return false;
-        } else {
-            
-            return $this->db->insert_id();;
-        }
+		$query = $this->db->get_where('wbs', $cleaned);
+		if ($query->num_rows() >= 1 ) {
+			if(!$overwrite){
+				if($return_id){
+					return $query->result()[0]->wbs_id;
+				}
+				return false;
+			}
+			$this->db->where('wbs_id', $query->result()[0]->wbs_id);
+			$this->db->update('wbs', $cleaned);
+			return $query->result()[0]->wbs_id;
+		}
+		else{
+			$fields = implode(',', array_keys($cleaned));
+			$value = implode(',', array_fill(0, count($cleaned), '?'));
+			if (!$this->db->insert('wbs', $cleaned)) {
+				return false;
+			} else {
+				
+				return $this->db->insert_id();
+			}
+		}		
     }
 
     public function update($data) {

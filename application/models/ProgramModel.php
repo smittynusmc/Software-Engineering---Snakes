@@ -49,16 +49,32 @@ Class ProgramModel extends CI_Model {
         }
     }
 
-    public function insert($data) {
+    public function insert($data,$overwrite = false,$return_id = false) {
+		
         $cleaned = $this->cleanEmpty($data);
-        $fields = implode(',', array_keys($cleaned));
-        $value = implode(',', array_fill(0, count($cleaned), '?'));
-        if (!$this->db->insert('program', $cleaned)) {
-            return false;
-        } else {
-            
-            return $this->db->insert_id();
-        }
+		$query = $this->db->get_where('program', $cleaned);
+		if ($query->num_rows() >= 1 ) {
+			if(!$overwrite){
+				if($return_id){
+					return $query->result()[0]->program_id;
+				}
+				return false;
+			}
+			$this->db->where('program_id', $query->result()[0]->program_id);
+			$this->db->update('program', $cleaned);
+			return $query->result()[0]->program_id;
+		}
+		else{
+			$fields = implode(',', array_keys($cleaned));
+			$value = implode(',', array_fill(0, count($cleaned), '?'));
+			if (!$this->db->insert('program', $cleaned)) {
+				return false;
+			} else {
+				
+				return $this->db->insert_id();
+			}
+		}		
+        
     }
 
     public function update($data) {
@@ -105,5 +121,6 @@ Class ProgramModel extends CI_Model {
         }
         return $data;
     }
+	
 
 }

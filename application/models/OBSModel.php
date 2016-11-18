@@ -69,9 +69,12 @@ Class OBSModel extends CI_Model {
         }
     }
 	
-	public function insert($data){
+	public function insert($data,$return_id = false){
 		$query = $this->db->get_where('obs',$data);
 		if ($query->num_rows() >= 1) {
+			if($return_id){
+					return $query->result()[0]->obs_id;
+			}
             return -1;
         } else {
 			$query = $this->db->insert('obs',$data);
@@ -81,6 +84,15 @@ Class OBSModel extends CI_Model {
 			} else {
 				return -2;	
 			}	
+        }
+	}
+	
+	public function check_insert($data){
+		$result = $query = $this->db->get_where('obs', $data);
+        if ($result->num_rows() >= 1) {
+            return $result->result();
+        } else {
+            return $this->insert($data);
         }
 	}
 	

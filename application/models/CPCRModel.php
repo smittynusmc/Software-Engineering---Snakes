@@ -70,35 +70,36 @@ Class CPCRModel extends CI_Model {
     }
 	
 	public function insert($data){
-		$query = $this->db->get_where('obs',$data);
-		if ($query->num_rows() >= 1) {
-            return -1;
+		if (!$this->db->insert('cpcr', $data)) {
+            return false;
         } else {
-			$query = $this->db->insert('obs',$data);
-			$query = $this->db->get_where('obs',$data);
-            if ($query->num_rows() >= 1) {
-				return $query->result()[0]->obs_id;
-			} else {
-				return -2;	
-			}	
+            
+            return $this->db->insert_id();;
+        }
+		
+	}
+	
+	public function update($data){	
+		
+		$cleaned = $this->cleanEmpty($data);
+        $cpcr_id = $cleaned['cpcr_id'];
+        unset($cleaned['cpcr_id']);
+
+        $this->db->where('cpcr_id', $cpcr_id);
+        if (!$this->db->update('cpcr', $cleaned)) {
+            return false;
+        } else {
+            return true;
         }
 	}
 	
-	public function update($data){
-		$obs_id = $data['obs_id'];
-		$query = $this->db->get_where('obs',$data);
+	public function get_status_codeset(){
+		$query = $this->db->get_where('cpcr_status',array('active'=>1));
 		if ($query->num_rows() >= 1) {
-            return -1;
-        } else {
-			$this->db->where('obs_id', $obs_id);
-			$this->db->update('obs', $data);
-			$query = $this->db->get_where('obs',$data);
-            if ($query->num_rows() >= 1) {
-				return $query->result()[0]->obs_id;
-			} else {
-				return -2;	
-			}	
-        }
+			return $query->result();
+		} else {
+			return false;	
+		}	
 	}
 
 
@@ -125,5 +126,12 @@ Class CPCRModel extends CI_Model {
         return array('error' => $count_error, 'success' => $count_success);
     }
 
-    
+    private function cleanEmpty($data) {
+        foreach ($data as $e) {
+            if (empty($e)) {
+                unset($e);
+            }
+        }
+        return $data;
+    }
 }

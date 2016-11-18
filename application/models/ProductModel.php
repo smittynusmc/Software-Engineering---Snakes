@@ -39,17 +39,33 @@ class ProductModel extends CI_Model {
             return FALSE;
         }
     }
+	
     
-    public function insert($data) {
-        $cleaned = $this->cleanEmpty($data);
-        $fields = implode(',', array_keys($cleaned));
-        $value = implode(',', array_fill(0, count($cleaned), '?'));
-		if (!$this->db->insert('product', $cleaned)) {
-            return false;
-        } else {
-            
-            return $this->db->insert_id();;
-        }
+    public function insert($data,$overwrite=false,$return_id = false) {
+		$cleaned = $this->cleanEmpty($data);
+		$query = $this->db->get_where('product', $cleaned);
+		if ($query->num_rows() >= 1 ) {
+			if(!$overwrite){
+				if($return_id){
+					return $query->result()[0]->product_id;
+				}
+				return false;
+			}
+			$this->db->where('product_id', $query->result()[0]->product_id);
+			$this->db->update('product', $cleaned);
+			return $query->result()[0]->product_id;
+		}
+		else{
+			$fields = implode(',', array_keys($cleaned));
+			$value = implode(',', array_fill(0, count($cleaned), '?'));
+			if (!$this->db->insert('product', $cleaned)) {
+				return false;
+			} else {
+				
+				return $this->db->insert_id();
+			}
+		}		
+        
     }
     
     public function update($data) {

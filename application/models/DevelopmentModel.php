@@ -70,11 +70,7 @@ Class DevelopmentModel extends CI_Model {
     public function import($data) {
         $count_error = 0;
         $count_success = 0;
-        $column_names = array("Project_ID","Product_Code","WBS_ID","WBS_Name","Date","SLOC","Hours"
-            );
-        array_walk($data, function(&$a) use ($column_names) {
-            $a = array_combine($column_names, $a);
-        });
+      
         $db_debug = $this->db->db_debug;
 //        $this->db->db_debug = FALSE;
         foreach ($data as $record) {
@@ -95,7 +91,7 @@ Class DevelopmentModel extends CI_Model {
 	public function update($data) {
         $cleaned = $this->cleanEmpty($data);
         $development_id = $cleaned['development_id'];
-        unset($cleaned['product_code']);
+        unset($cleaned['development_id']);
 
         $this->db->where('development_id', $development_id);
         if (!$this->db->update('development', $cleaned)) {
@@ -114,16 +110,26 @@ Class DevelopmentModel extends CI_Model {
         return $data;
     }
 	
-    public function insert($data) {
+    public function insert($data,$overwrite=false) {
         $cleaned = $this->cleanEmpty($data);
-        $fields = implode(',', array_keys($cleaned));
-        $value = implode(',', array_fill(0, count($cleaned), '?'));
-		if (!$this->db->insert('development', $cleaned)) {
-            return false;
-        } else {
-            
-            return $this->db->insert_id();;
-        }
-    }      
-   
+        $query = $this->db->get_where('development', $cleaned);
+		if ($query->num_rows() >= 1 ) {
+			if(!$overwrite){
+				return false;
+			}
+			$this->db->where('development_id', $query->result()[0]->development_id);
+			$this->db->update('development', $cleaned);
+			return $query->result()[0]->development_id;
+		}
+		else{
+			$fields = implode(',', array_keys($cleaned));
+			$value = implode(',', array_fill(0, count($cleaned), '?'));
+			if (!$this->db->insert('development', $cleaned)) {
+				return false;
+			} else {
+				
+				return $this->db->insert_id();
+			}
+		}	
+    }   
 }
