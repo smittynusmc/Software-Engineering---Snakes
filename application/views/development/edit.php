@@ -113,9 +113,10 @@
 	var wbs = JSON.parse('<?php echo json_encode($obs_data['wbs']);?>');
 	var def_option_product = '<option>Select Product</option>';
 	var def_option_wbs = '<option>Select WBS</option>';
-	var seted_program_id = <?php echo $program_id;?>;
-	var seted_product_id = <?php echo $product_id;?>;
-	var seted_wbs_id = <?php echo $wbs_id;?>;
+	var seted_program_id = <?php if(empty($program_id)){echo 0;} else{echo $program_id;}?>;
+	var seted_product_id = <?php if(empty($product_id)){echo 0;} else{echo $product_id;}?>;
+	var seted_wbs_id = <?php if(empty($wbs_id)){echo 0;} else{echo $wbs_id;}?>;
+	var seted_obs_id = <?php if(empty($obs_id)){echo 0;} else{echo $obs_id;}?>;
 	$(document).on('change','#edit_program_id',function(e){
 		var option = '';
 		var program_id = $('#edit_program_id').val();

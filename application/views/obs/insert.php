@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group">
 					<label>Program</label>
-					<select class="form-control select2" style="width: 100%;"name="program_id" id="program_id">
+					<select class="form-control select2" style="width: 100%;"name="program_id" id="obs_program_id">
 						<option value="">Select Program </option>
 						<?php
 							foreach($program as $row){
@@ -32,7 +32,7 @@
 				</div>
 				<div class="form-group">
 					<label>Product</label>
-					<select class="form-control select2" style="width: 100%;" name="product_id" id="product_id">
+					<select class="form-control select2" style="width: 100%;" name="product_id" id="obs_product_id">
 						<option value="">Select Product</option>
 						<?php
 							foreach($product as $row){
@@ -49,7 +49,7 @@
 				</div>
 				<div class="form-group">
 					<label>WBS</label>
-					<select class="form-control select2"name="wbs_id" id="wbs_id">
+					<select class="form-control select2"name="wbs_id" id="obs_wbs_id">
 						<option value="">Select WBS</option>
 						<?php
 							foreach($wbs as $row){

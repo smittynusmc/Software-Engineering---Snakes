@@ -287,7 +287,7 @@ Class CPCR extends CI_Controller {
         $data['cpcr_id'] = $this->input->post('cpcr_id');
 		$data['obs_id'] = $this->input->post('obs_id');
         $data['cpcr_status'] = $this->input->post('cpcr_status');
-		
+					$this->debuglog('CPCRModel  POST',$_POST);
 		if ($this->form_validation->run() == FALSE) {
             $this->get_edit($data['cpcr_id']);
         } else {
@@ -298,8 +298,9 @@ Class CPCR extends CI_Controller {
 			$data['obs_id'] = $record[0]->obs_id;
 			$data['program_id'] = $record[0]->program_id;
 			$data['product_id'] = $record[0]->product_id;
-			$data['wbs_id'] = $record[0]->wbs_id;;
+			$data['wbs_id'] = $record[0]->wbs_id;
 			$data['cpcr_status'] = $record[0]->cpcr_status;
+			$this->debuglog('CPCRModel ',$record);
             if ($result == FALSE) {
                 $data['status'] = 'failed';
                 $data['result'] = "Edit failed.";
