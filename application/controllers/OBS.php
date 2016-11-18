@@ -17,6 +17,10 @@ Class OBS extends CI_Controller {
 
 // Load database
         $this->load->model('OBSModel');
+		$this->load->model('ProgramModel');
+        $this->load->model('ProductModel');
+        $this->load->model('WBSModel');
+        $this->load->model('OBSModel');
 		$this->load->model('CommonModel');
 // Load file helper library        
         $this->load->helper('file');
@@ -108,7 +112,23 @@ Class OBS extends CI_Controller {
     public function get_upload() {
         $this->load->view('obs/upload');
     }
-
+	public function upload_validation($data){
+		$this->form_validation->set_rules('program_code', 'Program Code', 'trim|required|max_length[10]');
+		$this->form_validation->set_rules('program_name', 'Program Name', 'trim|required|max_length[75]');
+		$this->form_validation->set_rules('product_code', 'Product Code', 'trim|required|max_length[20]');
+		$this->form_validation->set_rules('product_name', 'Product Name', 'trim|required|max_length[75]');
+		$this->form_validation->set_rules('wbs_code', 'WBS Code', 'trim|required|max_length[20]');
+		$this->form_validation->set_rules('wbs_name', 'WBS Name', 'trim|required|max_length[75]');
+		$this->form_validation->set_data($data);
+		if($this->form_validation->run() == FALSE){
+			$result['status'] = -1;
+			$result['error'] = validation_errors();
+		}
+		else{
+			$result['status'] = 1;
+		}
+		return $result;
+	}
     public function upload() {
         
        
@@ -118,6 +138,10 @@ Class OBS extends CI_Controller {
 
         $this->load->library('upload', $config);
         $has_header = $this->input->post('has_header');
+        $overwrite = $this->input->post('overwrite');
+        $overwrite = ($overwrite == 1);
+		$insert_counter = 0;
+		$error_counter = 0;
         if (!$this->upload->do_upload('csv')) {
             $data['status'] = 'fail';
             $data['result'] = $this->upload->display_errors();
@@ -125,14 +149,63 @@ Class OBS extends CI_Controller {
         } else {
             $upload_info = $this->upload->data();
             $csvdata = array_map('str_getcsv', file($upload_info['full_path'])); 
-            if($has_header == 1){
+			if($has_header == 1){
                 array_shift($csvdata);
             }
-            $data['status'] = 'success';
-            $data['has_header'] = $has_header;
-            $result = $this->OBSModel->import($csvdata);
-            $data['result'] = "{$result['success']} rows inserted, {$result['error']} errors";
-            $this->load->view('obs/upload', $data);
+			$column_names = array(
+				'program_code', 'program_name'
+				,'product_code', 'product_name'
+				,'wbs_code', 'wbs_name'
+				);
+			array_walk($csvdata, function(&$a) use ($column_names) {
+				$a = array_combine($column_names, $a);
+			});
+			$error = array();
+			foreach($csvdata as $key=>$row){
+				$validation_result = $this->upload_validation($row);
+				if($validation_result['status'] < 0){
+					$error[$key] = $validation_result['error'];
+				}
+			}
+			
+			if(!empty($error)){
+				$data['error'] = $error;
+				$this->load->view('obs/upload',$data);
+			}
+			else{
+				$data['status'] = 'success';
+				$data['has_header'] = $has_header;
+				foreach($csvdata as $key=>$row){
+					$program_data = array('program_code'=>$row['program_code']
+									,'program_name'=>$row['program_name']);
+					$program_id = $this->ProgramModel->insert($program_data,$overwrite,true);
+					$this->debuglog('program_id ',$program_id);
+					$product_data = array('product_code'=>$row['product_code']
+									,'product_name'=>$row['product_name']);
+					$product_id = $this->ProductModel->insert($product_data,$overwrite,true);
+					$this->debuglog('product_id ',$product_id);
+					$wbs_data = array('wbs_code'=>$row['wbs_code']
+									,'wbs_name'=>$row['wbs_name']);
+					$wbs_id = $this->WBSModel->insert($wbs_data,$overwrite,true);
+					$this->debuglog('wbs_id ',$wbs_id);
+					$obs_data  = array('program_id'=>$program_id,
+								'product_id'=>$product_id,
+								'wbs_id'=>$wbs_id);
+					$obs_id = $this->OBSModel->insert($obs_data);
+					$this->debuglog('obs_id ',$obs_id);
+					if($obs_id != false){
+						$insert_counter ++;
+					}
+					else{
+						$error_counter ++;
+					}
+					
+				}
+				
+				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} errors";
+				$this->load->view('obs/upload', $data);
+			}
+			
         }
         
     }

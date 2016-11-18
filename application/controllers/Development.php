@@ -190,11 +190,11 @@ Class Development extends CI_Controller {
 	
 	public function upload_validation($data){
 		$this->form_validation->set_rules('program_code', 'Program Code', 'trim|required|max_length[10]');
-		$this->form_validation->set_rules('program_name', 'Program Name', 'trim|required|max_length[30]');
+		$this->form_validation->set_rules('program_name', 'Program Name', 'trim|required|max_length[75]');
 		$this->form_validation->set_rules('product_code', 'Product Code', 'trim|required|max_length[20]');
-		$this->form_validation->set_rules('product_name', 'Product Name', 'trim|required|max_length[50]');
+		$this->form_validation->set_rules('product_name', 'Product Name', 'trim|required|max_length[75]');
 		$this->form_validation->set_rules('wbs_code', 'WBS Code', 'trim|required|max_length[20]');
-		$this->form_validation->set_rules('wbs_name', 'WBS Name', 'trim|required|max_length[50]');
+		$this->form_validation->set_rules('wbs_name', 'WBS Name', 'trim|required|max_length[75]');
 		$this->form_validation->set_rules('date', 'Month', 'trim|required|callback_regex_check_date');
 		$this->form_validation->set_data($data);
 		if($this->form_validation->run() == FALSE){
