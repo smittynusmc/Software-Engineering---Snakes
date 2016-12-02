@@ -189,6 +189,8 @@ Class Development extends CI_Controller {
 	
 	
 	public function upload_validation($data){
+		$this->form_validation->reset_validation();
+		$this->form_validation->set_data($data);
 		$this->form_validation->set_rules('program_code', 'Program Code', 'trim|required|max_length[10]');
 		$this->form_validation->set_rules('program_name', 'Program Name', 'trim|required|max_length[75]');
 		$this->form_validation->set_rules('product_code', 'Product Code', 'trim|required|max_length[20]');
@@ -196,7 +198,7 @@ Class Development extends CI_Controller {
 		$this->form_validation->set_rules('wbs_code', 'WBS Code', 'trim|required|max_length[20]');
 		$this->form_validation->set_rules('wbs_name', 'WBS Name', 'trim|required|max_length[75]');
 		$this->form_validation->set_rules('date', 'Month', 'trim|required|callback_regex_check_date');
-		$this->form_validation->set_data($data);
+		
 		if($this->form_validation->run() == FALSE){
 			$result['status'] = -1;
 			$result['error'] = validation_errors();
@@ -207,6 +209,7 @@ Class Development extends CI_Controller {
 		return $result;
 	}
 	public function insert($data=null){
+		
 		$this->form_validation->set_rules('obs_id', 'Program,Product, WBS', 'trim|required|numeric');
 		$this->form_validation->set_rules('hours', 'Hours', 'trim|numeric');
 		$this->form_validation->set_rules('sloc', 'SLOC', 'trim|numeric');
@@ -276,7 +279,6 @@ Class Development extends CI_Controller {
 			$this->debuglog('before validations',$csvdata);
 			$error = array();
 			foreach($csvdata as $key=>$row){
-				
 				$validation_result = $this->upload_validation($row);
 				$this->debuglog('validation_result ',$validation_result);
 				if($validation_result['status'] < 0){
