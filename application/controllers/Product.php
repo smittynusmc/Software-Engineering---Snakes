@@ -200,7 +200,7 @@ Class Product extends CI_Controller {
 					$product_data = array('product_code'=>$row['product_code']
 									,'product_name'=>$row['product_name']);
 					$product_id = $this->ProductModel->insert($product_data,$overwrite,true);
-					if($cpcr_id != false){
+					if($product_id != false){
 						$insert_counter ++;
 					}
 					else{
@@ -221,5 +221,4 @@ Class Product extends CI_Controller {
         $this->load->view('product/upload');
     }
         
-    }
 }
