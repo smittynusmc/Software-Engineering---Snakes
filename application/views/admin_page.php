@@ -17,6 +17,7 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/select2/select2.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/main.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -27,6 +28,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>dist/css/skins/_all-skins.min.css">
+		
         <!-- iCheck -->
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -67,22 +69,33 @@
                     <ul class="sidebar-menu">
                         <li class="header">MAIN NAVIGATION</li>
                         <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Project/index" target="content">Project</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Program/index" target="content">Program</a>
                         </li>
                         <li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Product/index" target="content">Product</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Bug/index" target="content">Bug</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/WBS/index" target="content">WBS</a>
                         </li>
                         <li class="treeview">
-                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/WBS/index" target="content">WBS</a>
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/OBS/index" target="content">OBS</a>
+                        </li>
+                        <li class="treeview">
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/CPCR/index" target="content">CPCR</a>
                         </li>
                         
                         <li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Development/index" target="content">Developement</a>
                         </li>
-                        
+                        <li class="treeview">
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Sprint/index" target="content">Sprint</a>
+                        </li>
+						<li class="treeview">
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Capability/index" target="content">Capability</a>
+                        </li>
+						<li class="treeview">
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Report/index" target="content">Report</a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -114,6 +127,7 @@
         <!-- Bootstrap 3.3.6 -->
         <script src="<?php echo base_url(); ?>bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>js/admin_page.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.tablesorter.js"></script> 
         <!-- Morris.js charts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <!-- Sparkline -->
@@ -128,6 +142,8 @@
         <script src="<?php echo base_url(); ?>plugins/daterangepicker/daterangepicker.js"></script>
         <!-- datepicker -->
         <script src="<?php echo base_url(); ?>plugins/datepicker/bootstrap-datepicker.js"></script>
+		<!-- Select2 -->
+        <script src="<?php echo base_url(); ?>plugins/select2/select2.full.min.js"></script>
         <!-- Bootstrap WYSIHTML5 -->
         <script src="<?php echo base_url(); ?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
         <!-- Slimscroll -->

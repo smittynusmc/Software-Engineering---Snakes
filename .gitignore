@@ -2,3 +2,5 @@ application/.htaccess
 application/config/config.php
 application/config/database.php
 uploads/*
+logs/*
+application/logs/*
