@@ -16,7 +16,7 @@
 				</div>
 				<div class="form-group">
 					<label>Program</label>
-					<select class="form-control select2" style="width: 100%;" name="program_id" id="edit_program_id">
+					<select class="form-control select2" style="width: 100%;" name="program_id" id="edit_cpcr_program_id">
 						<option value="">Select Programs </option>
 						<?php
 							foreach($obs_data['program'] as $row){
@@ -33,7 +33,7 @@
 				</div>
 				<div class="form-group">
 					<label>Product</label>
-					<select class="form-control select2" style="width: 100%;" name="product_id" id="edit_product_id">
+					<select class="form-control select2" style="width: 100%;" name="product_id" id="edit_cpcr_product_id">
 						<option value="">Select Product</option>
 						
 					  
@@ -41,7 +41,7 @@
 				</div>
 				<div class="form-group">
 					<label>WBS</label>
-					<select class="form-control select2" style="width: 100%;" name="wbs_id" id="edit_wbs_id">
+					<select class="form-control select2" style="width: 100%;" name="wbs_id" id="edit_cpcr_wbs_id">
 						<option value="">Select WBS</option>
 						
 					  
@@ -66,7 +66,7 @@
 					</select>
                 </div>
 				<div class="form-group">
-                    <input type="text" class="form-control" name="obs_id" id="edit_obs_id" value="<?php echo $obs_id;?>" style="display:none;" >
+                    <input type="text" class="form-control" name="obs_id" id="edit_cpcr_obs_id" value="<?php echo $obs_id;?>" style="display:none;" >
                 </div>
 				
                 
@@ -101,13 +101,13 @@
 		var seted_program_id = <?php if(empty($program_id)){echo 0;} else{echo $program_id;}?>;
 		var seted_product_id = <?php if(empty($product_id)){echo 0;} else{echo $product_id;}?>;
 		var seted_wbs_id = <?php if(empty($wbs_id)){echo 0;} else{echo $wbs_id;}?>;
-		var seted_obs_id = <?php if(empty($wbs_id)){echo 0;} else{echo $wbs_id;}?>;
-		$(document).on('change','#edit_program_id',function(e){
+		var seted_obs_id = <?php if(empty($obs_id)){echo 0;} else{echo $obs_id;}?>;
+		$(document).on('change','#edit_cpcr_program_id',function(e){
 			var option = '';
-			var program_id = $('#edit_program_id').val();
-			$('#edit_product_id').html(def_option_product);
-			$('#edit_wbs_id').html(def_option_wbs);
-			$('#edit_obs_id').val('');
+			var program_id = $('#edit_cpcr_program_id').val();
+			$('#edit_cpcr_product_id').html(def_option_product);
+			$('#edit_cpcr_wbs_id').html(def_option_wbs);
+			$('#edit_cpcr_obs_id').val('');
 			if(program_id > 0){
 				option += '<option>Select Product</option>';
 				for (pro in product[program_id]){
@@ -118,60 +118,61 @@
 						option += '<option value="'+product[program_id][pro].product_id+'"> '+product[program_id][pro].product_name+'</option>';
 					}
 				};
-				$('#edit_product_id').html(option);
-				$('#edit_product_id').prop('disabled', false);
-				$('#edit_wbs_id').prop('disabled', true);
+				$('#edit_cpcr_product_id').html(option);
+				$('#edit_cpcr_product_id').prop('disabled', false);
+				$('#edit_cpcr_wbs_id').prop('disabled', true);
 			}
 			else{				
-				$('#edit_product_id').html(def_option_product);
-				$('#edit_product_id').prop('disabled', true);
-				$('#edit_wbs_id').html(def_option_wbs);
-				$('#edit_wbs_id').prop('disabled', true);
+				$('#edit_cpcr_product_id').html(def_option_product);
+				$('#edit_cpcr_product_id').prop('disabled', true);
+				$('#edit_cpcr_wbs_id').html(def_option_wbs);
+				$('#edit_cpcr_wbs_id').prop('disabled', true);
 			}
 			
 		});
-		$(document).on('change','#edit_product_id',function(e){
+		$(document).on('change','#edit_cpcr_product_id',function(e){
 			var option = '';
-			var program_id = $('#edit_program_id').val();
-			var product_id = $('#edit_product_id').val();
-			$('#obs_id').val('');
+			var program_id = $('#edit_cpcr_program_id').val();
+			var product_id = $('#edit_cpcr_product_id').val();
+			$('#edit_cpcr_obs_id').val('');
 			if(program_id > 0 && product_id >0){
 				option += def_option_wbs;
+				
 				for (w in wbs[program_id][product_id]){
 					if(seted_wbs_id > 0 && seted_wbs_id == wbs[program_id][product_id][w].wbs_id){
-						option += '<option value="'+wbs[program_id][product_id][w].obs_id+'" selected> '+wbs[program_id][product_id][w].wbs_code+'-'+wbs[program_id][product_id][w].wbs_name+'</option>';
+						option += '<option obs_id="'+wbs[program_id][product_id][w].obs_id+'"  value="'+wbs[program_id][product_id][w].wbs_id+'" selected> '+wbs[program_id][product_id][w].wbs_code+'-'+wbs[program_id][product_id][w].wbs_name+'</option>';
 					}
 					else{
 						option += '<option obs_id="'+wbs[program_id][product_id][w].obs_id+'"  value="'+wbs[program_id][product_id][w].wbs_id+'"> '+wbs[program_id][product_id][w].wbs_code+'-'+wbs[program_id][product_id][w].wbs_name+'</option>';
 					}
 				};		
-				$('#edit_wbs_id').prop('disabled', false);
-				$('#edit_wbs_id').html(option);
+				$('#edit_cpcr_wbs_id').prop('disabled', false);
+				$('#edit_cpcr_wbs_id').html(option);
 			}
 			else{
-				$('#edit_wbs_id').html(def_option_wbs);
-				$('#edit_wbs_id').prop('disabled', true);
+				$('#edit_cpcr_wbs_id').html(def_option_wbs);
+				$('#edit_cpcr_wbs_id').prop('disabled', true);
 			}
 			
 		});
-		$(document).on('change','#edit_wbs_id',function(e){
-			if($('#edit_wbs_id').val() > 0){
-				$('#edit_obs_id').val($('#edit_wbs_id option:selected').attr('obs_id'));
+		$(document).on('change','#edit_cpcr_wbs_id',function(e){
+			if($('#edit_cpcr_wbs_id').val() > 0){
+				$('#edit_cpcr_obs_id').val($('#edit_cpcr_wbs_id option:selected').attr('obs_id'));
 			}
 			else{
-				$('#edit_obs_id').val('');
+				$('#edit_cpcr_obs_id').val('');
 			}
 		});
-		$('#edit_program_id').trigger('change');
+		$('#edit_cpcr_program_id').trigger('change');
 		if(seted_product_id > 0){
-			$('#edit_product_id').trigger('change');
+			$('#edit_cpcr_product_id').trigger('change');
 		}
 		if(seted_wbs_id > 0){
-			$('#edit_wbs_id').trigger('change');
+			$('#edit_cpcr_wbs_id').trigger('change');
 		}
 		
 		if(seted_obs_id > 0){
-			$('#edit_obs_id').val(seted_obs_id);
+			$('#edit_cpcr_obs_id').val(seted_obs_id);
 		}
 		$('#date').datepicker({format: 'yyyy-mm-dd',});
 </script>

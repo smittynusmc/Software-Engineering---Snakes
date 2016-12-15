@@ -1,7 +1,10 @@
 <?php
 
 Class DevelopmentModel extends CI_Model {
-
+	private $log_path = "logs/applog.txt";
+	private function debuglog($mess,$data=null){
+		write_file($this->log_path,"\n".$mess.":\n".print_r($data,true),'a');
+	}
     public function get($id) {
         $result = $this->db->query("SELECT * FROM view_development WHERE development_id = ?", array($id));
         if ($result->num_rows() >= 1) {
@@ -132,4 +135,61 @@ Class DevelopmentModel extends CI_Model {
 			}
 		}	
     }   
+	public function development_cost_report($data){
+		
+        $program_id = 0;
+        if (!empty($data['program_id'])) {
+            $program_id = $data['program_id'];
+        }
+        $product_id = 0;
+        if (!empty($data['product_id'])) {
+            $product_id = $data['product_id'];
+        }
+		$wbs_id = 0;
+        if (!empty($data['wbs_id'])) {
+            $wbs_id = $data['wbs_id'];
+        }
+		
+		$program_detail_level= $data['program_detail_level'];
+		$product_detail_level= $data['product_detail_level'];
+		$wbs_detail_level= $data['wbs_detail_level'];
+		if($program_detail_level ==1
+			&& $product_detail_level == 1
+			&& $wbs_detail_level == 1){
+				$group_by_field = "program_id,program_name,product_id,product_name,wbs_id,wbs_name";
+			}
+		elseif($program_detail_level ==1
+			&& $product_detail_level == 1){
+				$group_by_field = "program_id,program_name,product_id,product_name";
+			}
+		elseif($program_detail_level ==1){
+			$group_by_field = "program_id,program_name";
+		}
+		else{
+			return FALSE;
+		}
+		
+		$query = "SELECT * FROM(
+				SELECT $group_by_field,SUM(sloc) sum_sloc,SUM(hours) sum_hours,AVG(sloc) avg_sloc,avg(hours) avg_hours
+				FROM view_development
+				WHERE (program_id = ? OR 0 = ?)
+					AND (product_id = ? OR 0 = ?)
+					AND (wbs_id = ? OR 0 = ?)
+				GROUP BY $group_by_field
+				) pull
+				ORDER BY $group_by_field
+				";
+				
+		$inputs = array($program_id, $program_id,
+            $product_id, $product_id,
+            $wbs_id, $wbs_id,
+		);
+        $result = $this->db->query($query, $inputs);
+		if ($result->num_rows() >= 0) {
+
+            return $result->result_array();
+        } else {
+            return FALSE;
+        }	
+	}
 }

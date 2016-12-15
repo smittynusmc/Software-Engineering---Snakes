@@ -1,7 +1,7 @@
 <?php
 
 Class CPCRModel extends CI_Model {
-
+	private $log_path = "logs/applog.txt";
     public function get($id) {
         $result = $this->db->query("SELECT * FROM view_cpcr WHERE  cpcr_id= ?", array($id));
         if ($result->num_rows() >= 1) {
@@ -10,7 +10,9 @@ Class CPCRModel extends CI_Model {
             return false;
         }
     }
-
+	private function debuglog($mess,$data=null){
+		write_file($this->log_path,"\n".$mess.":\n".print_r($data,true),'a');
+	}
     public function search($data) {
         $cpcr_id = '';
         if (isset($data['cpcr_id'])) {
@@ -125,6 +127,47 @@ Class CPCRModel extends CI_Model {
         $this->db->db_debug = $db_debug;
         return array('error' => $count_error, 'success' => $count_success);
     }
+	
+	public function cpcr_status_report($data){
+		
+        $program_id = 0;
+        if (!empty($data['program_id'])) {
+            $program_id = $data['program_id'];
+        }
+        $product_id = 0;
+        if (!empty($data['product_id'])) {
+            $product_id = $data['product_id'];
+        }
+		$wbs_id = 0;
+        if (!empty($data['wbs_id'])) {
+            $wbs_id = $data['wbs_id'];
+        }
+		$cpcr_status = 'ALL';
+        if (!empty($data['cpcr_status'])) {
+            $cpcr_status = $data['cpcr_status'];
+        }
+		
+		$query = "SELECT  program_id,program_name,product_id,product_name,wbs_id,wbs_name,cpcr_status
+				FROM view_cpcr
+				WHERE (program_id = ? OR 0 = ?)
+					AND (product_id = ? OR 0 = ?)
+					AND (wbs_id = ? OR 0 = ?)
+					AND (cpcr_status = ? OR 'ALL' = ?)
+				ORDER BY program_name,product_name,wbs_name,cpcr_status
+				";
+		$inputs = array($program_id, $program_id,
+            $product_id, $product_id,
+            $wbs_id, $wbs_id,
+			$cpcr_status, $cpcr_status
+            );
+        $result = $this->db->query($query, $inputs);
+        if ($result->num_rows() >= 0) {
+
+            return $result->result();
+        } else {
+            return FALSE;
+        }		
+	}
 
     private function cleanEmpty($data) {
         foreach ($data as $e) {

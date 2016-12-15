@@ -28,6 +28,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>dist/css/skins/_all-skins.min.css">
+		
         <!-- iCheck -->
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -92,6 +93,9 @@
 						<li class="treeview">
                             <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Capability/index" target="content">Capability</a>
                         </li>
+						<li class="treeview">
+                            <a class='menu-item' archo="<?php echo base_url(); ?>index.php/Report/index" target="content">Report</a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -123,6 +127,7 @@
         <!-- Bootstrap 3.3.6 -->
         <script src="<?php echo base_url(); ?>bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>js/admin_page.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.tablesorter.js"></script> 
         <!-- Morris.js charts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <!-- Sparkline -->

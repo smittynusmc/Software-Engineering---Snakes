@@ -97,6 +97,43 @@ class Helper{
 		
 		return array('program'=>$program,'product'=>$product,'wbs'=>$wbs);
 	}
+	/**
+	 * Generate CSV from a array
+	 *
+	 * @param	object	$array		array result object
+	 * @param	string	$delim		Delimiter (default: ,)
+	 * @param	string	$newline	Newline character (default: \n)
+	 * @param	string	$enclosure	Enclosure (default: ")
+	 * @return	string
+	 */
+	public function csv_from_result($array, $delim = ',', $newline = "\n", $enclosure = '"')
+	{
+		if ( ! is_array($array) || !is_array($array[0] ))
+		{
+			show_error('You must submit a valid array');
+		}
+
+		$out = '';
+		// First generate the headings from the table column names
+		foreach (array_keys($array[0]) as $name)
+		{
+			$out .= $enclosure.str_replace($enclosure, $enclosure.$enclosure, $name).$enclosure.$delim;
+		}
+
+		$out = substr($out, 0, -strlen($delim)).$newline;
+
+		// Next blast through the result array and build out the rows
+		foreach($array as $row){
+			$line = array();
+			foreach ($row as $item)
+			{
+				$line[] = $enclosure.str_replace($enclosure, $enclosure.$enclosure, $item).$enclosure;
+			}
+			$out .= implode($delim, $line).$newline;
+		}
+
+		return $out;
+	}
 }
 
 ?>
