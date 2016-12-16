@@ -328,7 +328,7 @@ Class Development extends CI_Controller {
 					
 				}
 				
-				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} errors";
+				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} existed";
 				$this->load->view('development/upload', $data);
 			}
 			

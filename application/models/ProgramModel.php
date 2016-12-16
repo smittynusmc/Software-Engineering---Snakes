@@ -52,7 +52,7 @@ Class ProgramModel extends CI_Model {
     public function insert($data,$overwrite = false,$return_id = false) {
 		
         $cleaned = $this->cleanEmpty($data);
-		$query = $this->db->get_where('program', $cleaned);
+		$query = $this->db->get_where('program', array('program_code'=>$cleaned['program_code']));
 		if ($query->num_rows() >= 1 ) {
 			if(!$overwrite){
 				if($return_id){

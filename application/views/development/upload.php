@@ -39,7 +39,7 @@
                 <button type="submit" class="btn btn-primary submit-button" formid="development_upload_form">Submit</button>
             </div>
         </div>
-        <div class="modal-footer" id="project_search-result">
+        <div class="modal-footer" id="development_upload-result">
             <?php
 			if(!empty($error)){
 				echo '<span>There are errors occur with data included in csv. Please correct the error before continue. </span>';

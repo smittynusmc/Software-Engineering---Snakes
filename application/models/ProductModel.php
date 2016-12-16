@@ -43,7 +43,7 @@ class ProductModel extends CI_Model {
     
     public function insert($data,$overwrite=false,$return_id = false) {
 		$cleaned = $this->cleanEmpty($data);
-		$query = $this->db->get_where('product', $cleaned);
+		$query = $this->db->get_where('product',  array('product_code'=>$cleaned['product_code']));
 		if ($query->num_rows() >= 1 ) {
 			if(!$overwrite){
 				if($return_id){

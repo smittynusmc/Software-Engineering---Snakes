@@ -127,7 +127,7 @@ Class CPCR extends CI_Controller {
         
        
         $config['upload_path'] = 'uploads';
-        $config['allowed_types'] = 'csv';
+        $config['allowed_types'] = '*';
         $config['max_size'] = 3000;
 
         $this->load->library('upload', $config);

@@ -43,7 +43,7 @@ Class WBSModel extends CI_Model {
 
     public function insert($data,$overwrite = false,$return_id = false) {
         $cleaned = $this->cleanEmpty($data);
-		$query = $this->db->get_where('wbs', $cleaned);
+		$query = $this->db->get_where('wbs', array('wbs_code'=>$cleaned['wbs_code']));
 		if ($query->num_rows() >= 1 ) {
 			if(!$overwrite){
 				if($return_id){

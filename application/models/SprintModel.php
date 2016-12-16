@@ -35,16 +35,32 @@ class SprintModel extends CI_Model {
         }
     }
     
-    public function insert($data) {
-        $cleaned = $this->cleanEmpty($data);
-        $fields = implode(',', array_keys($cleaned));
-        $value = implode(',', array_fill(0, count($cleaned), '?'));
-        $query = "INSERT INTO sprint ({$fields}) VALUES({$value})";
-        if (!$this->db->query($query, $cleaned)) {
-            return false;
-        } else {
-            return $this->db->insert_id();
-        }
+ 
+	public function insert($data,$overwrite=false,$return_id = false) {
+		$cleaned = $this->cleanEmpty($data);
+		$query = $this->db->get_where('sprint',  array('sprint_name'=>trim($cleaned['sprint_name'])));
+		if ($query->num_rows() >= 1 ) {
+			if(!$overwrite){
+				if($return_id){
+					return $query->result()[0]->sprint_id;
+				}
+				return false;
+			}
+			$this->db->where('sprint_id', $query->result()[0]->sprint_id);
+			$this->db->update('sprint', $cleaned);
+			return $query->result()[0]->sprint_id;
+		}
+		else{
+			$fields = implode(',', array_keys($cleaned));
+			$value = implode(',', array_fill(0, count($cleaned), '?'));
+			if (!$this->db->insert('sprint', $cleaned)) {
+				return false;
+			} else {
+				
+				return $this->db->insert_id();
+			}
+		}		
+        
     }
     
     public function update($data) {

@@ -170,7 +170,7 @@ Class WBS extends CI_Controller {
 
     public function upload() {
         $config['upload_path'] = 'uploads';
-        $config['allowed_types'] = 'csv';
+        $config['allowed_types'] = '*';
         $config['max_size'] = 3000;
 
         $this->load->library('upload', $config);
@@ -214,7 +214,7 @@ Class WBS extends CI_Controller {
 				foreach($csvdata as $key=>$row){
 					$wbs_data = array('wbs_code'=>$row['wbs_code']
 									,'wbs_name'=>$row['wbs_name']);
-					$wbs_id = $this->WBSModel->insert($wbs_data,$overwrite,true);
+					$wbs_id = $this->WBSModel->insert($wbs_data,$overwrite);
 					if($wbs_id != false){
 						$insert_counter ++;
 					}
@@ -224,7 +224,7 @@ Class WBS extends CI_Controller {
 					
 				}
 				
-				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} errors";
+				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} existed";
 				$this->load->view('wbs/upload', $data);
 			}
 			

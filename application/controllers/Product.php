@@ -155,7 +155,7 @@ Class Product extends CI_Controller {
 
     public function upload() {
         $config['upload_path'] = 'uploads';
-        $config['allowed_types'] = 'csv';
+        $config['allowed_types'] = '*';
         $config['max_size'] = 3000;
 
         $this->load->library('upload', $config);
@@ -209,7 +209,7 @@ Class Product extends CI_Controller {
 					
 				}
 				
-				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} errors";
+				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} existed";
 				$this->load->view('product/upload', $data);
 			}
 			
