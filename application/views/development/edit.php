@@ -84,7 +84,10 @@
                 </div>	
 				<div class="form-group">
                     <input type="text" class="form-control" name="obs_id" id="edit_obs_id" value="<?php echo $obs_id;?>" style="display:none;" >
-                </div>	
+                </div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="capability_ids" id="edit_capability_ids" value="<?php echo $obs_id;?>" style="display:none;" >
+				</div>
                 
             </div> 
         </div>

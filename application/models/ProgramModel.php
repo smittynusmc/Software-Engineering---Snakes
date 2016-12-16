@@ -37,8 +37,11 @@ Class ProgramModel extends CI_Model {
                 . "WHERE (? = '' OR program_id =?) "
                 . " AND (? = '' OR program_code LIKE concat('%',?,'%') )"
                 . " AND (? = '' OR program_name LIKE concat('%',?,'%') )"
-                . " and (build_date >= ? and end_date <= ? )";
-        $inputs = array($program_id, $program_id, $program_code, $program_code,$program_name, $program_name, $build_date, $end_date);
+                . " and ((build_date >= ? and end_date <= ? ) 
+					|| (('1900-01-01' = ? and build_date IS NULL )
+					|| (('1900-01-01' = ? and end_date IS NULL))
+					)) ";
+        $inputs = array($program_id, $program_id, $program_code, $program_code,$program_name, $program_name, $build_date, $end_date, $build_date, $end_date);
 
         $result = $this->db->query($query, $inputs);
         if ($result->num_rows() >= 1) {

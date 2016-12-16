@@ -106,18 +106,20 @@ $(document).ready(function () {
         }
 		
         data = encodeURI(csv);
-		jQuery('<a/>', {
-			id: 'foo',
-			href: data,
-			download: filename,
-			rel: 'external',
-			text: 'Go to Google!'
-		})
-        $('<a></a>')
-		.attr('id','downloadFile')
-		.attr('href',data)
-		.attr('download',filename)
-		.appendTo('body');
+		if($('#downloadFile').length == 0) {
+			 $('<a></a>')
+			.attr('id','downloadFile')
+			.attr('href',data)
+			.attr('download',filename)
+			.appendTo('body');
+		}
+		else{
+			$('#downloadFile')
+			.attr('href',data)
+			.attr('download',filename)
+			.appendTo('body');
+		}		
+       
 
 		$('#downloadFile').ready(function() {
 			$('#downloadFile').get(0).click();

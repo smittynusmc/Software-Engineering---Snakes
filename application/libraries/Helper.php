@@ -6,6 +6,13 @@
  * and open the template in the editor.
  */
 class Helper{
+	private $log_path = "logs/applog.txt";
+	
+	private function debuglog($mess,$data=null){
+		write_file($this->log_path,"\n".$mess.":\n".print_r($data,true),'a');
+	}
+	
+	
     function is_set($data){
         if(isset($data)){
             return $data;
@@ -77,14 +84,19 @@ class Helper{
 				$product[$program_id] = array();
 				$wbs[$program_id] = array();
 			}
-			if($new_product_id){
+			if($new_product_id||$new_program_id){
 				$product_id = $obs_record->product_id;
 				array_push($product[$program_id],array('product_id'=>$obs_record->product_id
 				,'product_code'=>$obs_record->product_code
 				,'product_name'=>$obs_record->product_name));
 				$wbs[$program_id][$product_id] = array();
 			}
-			if($new_wbs_id){
+			
+			if(!is_array($wbs[$program_id][$product_id])){
+				$this->debuglog('helper',$obs_record);
+				$this->debuglog('wbs',$wbs);
+			}
+			if($new_wbs_id||$new_product_id||$new_program_id){
 				$wbs_id = $obs_record->wbs_id;
 				array_push($wbs[$program_id][$product_id], array('obs_id'=>$obs_record->obs_id
 				,'wbs_id'=>$obs_record->wbs_id

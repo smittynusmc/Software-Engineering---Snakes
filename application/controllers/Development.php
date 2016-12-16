@@ -101,7 +101,7 @@ Class Development extends CI_Controller {
             $data['wbs_name'] = '';
             $data['sloc'] = '';
             $data['hours'] = '';
-			$data['obs_data'] = $this->helper->process_obs($this->CommonModel->getOBSList());
+			// $data['obs_data'] = $this->helper->process_obs($this->CommonModel->getOBSList());
         }
 
         $this->load->view('development/search', $data);
@@ -247,7 +247,7 @@ Class Development extends CI_Controller {
         
        
         $config['upload_path'] = 'uploads';
-        $config['allowed_types'] = 'csv';
+        $config['allowed_types'] = '*';
         $config['max_size'] = 3000;
 
         $this->load->library('upload', $config);
