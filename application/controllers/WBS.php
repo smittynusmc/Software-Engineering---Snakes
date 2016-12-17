@@ -224,7 +224,7 @@ Class WBS extends CI_Controller {
 					
 				}
 				
-				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} existed";
+				$data['result'] = "{$insert_counter} rows inserted/updated, {$error_counter} rows existed";
 				$this->load->view('wbs/upload', $data);
 			}
 			

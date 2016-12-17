@@ -95,7 +95,7 @@ Class User_Authentication extends CI_Controller {
                 }
                 else{
                     $data = array(
-                    'error_message' => 'Invaslid Username or Password'
+                    'error_message' => 'Invalid Username or Password'
                     );
                     $this->load->view('login_form', $data);
                 }

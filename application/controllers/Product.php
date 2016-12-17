@@ -199,7 +199,7 @@ Class Product extends CI_Controller {
 				foreach($csvdata as $key=>$row){
 					$product_data = array('product_code'=>$row['product_code']
 									,'product_name'=>$row['product_name']);
-					$product_id = $this->ProductModel->insert($product_data,$overwrite,true);
+					$product_id = $this->ProductModel->insert($product_data,$overwrite);
 					if($product_id != false){
 						$insert_counter ++;
 					}
@@ -209,7 +209,7 @@ Class Product extends CI_Controller {
 					
 				}
 				
-				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} existed";
+				$data['result'] = "{$insert_counter} rows inserted/updated, {$error_counter} rows existed";
 				$this->load->view('product/upload', $data);
 			}
 			

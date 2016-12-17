@@ -241,7 +241,7 @@ Class Program extends CI_Controller {
 					$program_data = array('program_code'=>$row['program_code']
 									,'program_name'=>$row['program_name'],'build_date'=>$row['build_date'],
 									'end_date'=>$row['end_date']);
-					$program_id = $this->ProgramModel->insert($program_data,$overwrite,true);
+					$program_id = $this->ProgramModel->insert($program_data,$overwrite);
 					if($program_id != false){
 						$insert_counter ++;
 					}
@@ -251,7 +251,7 @@ Class Program extends CI_Controller {
 					
 				}
 				
-				$data['result'] = "{$insert_counter} rows inserted, {$error_counter} existed";
+				$data['result'] = "{$insert_counter} rows inserted/updated, {$error_counter} rows existed";
 				$this->load->view('program/upload', $data);
 			}
 			
